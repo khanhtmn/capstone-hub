@@ -51,22 +51,58 @@ function Header() {
         </div>
 
         <div className="CardsCollection">
+
           <div className="Card">
-            <p className="UserFirstname">Khanh Nguyen</p>
-            <p>Major: CS - Applied Problem Solving | Minor: SS</p>
-            <p>Project Features:</p>
-            <p>An interdisciplinary projects to leverage technology for social goods. My current idea is to build a platform for mentoring women and non-binary students in Computer Science. The idea may change over time as I do research more, but ...</p>
+            <div className="AvaTextCard">
+              <img src={Ava} className="Avatar" alt="Avatar"/>
+                <div className="PersonalInfo">
+                  <p className="UserFirstname">Khanh Nguyen</p>
+                  <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
+                  <p className="Text">Project Features:</p>
+                </div>
+            </div>
+            <p className="Text">An interdisciplinary projects to leverage technology for social goods. My current idea is to build a platform for mentoring women and non-binary students in Computer Science. The idea may change over time as I do research more, but ...</p>
           </div>
+
           <div className="Card">
-            <p className="UserFirstname">Khanh Nguyen</p>
-            <p>Major: CS - Applied Problem Solving | Minor: SS</p>
-            <p>Project Features:</p>
-            <p>An interdisciplinary projects to leverage technology for social goods. My current idea is to build a platform for mentoring women and non-binary students in Computer Science. The idea may change over time as I do research more, but ...</p>
+            <div className="AvaTextCard">
+              <img src={Ava} className="Avatar" alt="Avatar"/>
+                <div className="PersonalInfo">
+                  <p className="UserFirstname">Khanh Nguyen</p>
+                  <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
+                  <p className="Text">Project Features:</p>
+                </div>
+            </div>
+            <p className="Text">An interdisciplinary projects to leverage technology for social goods. My current idea is to build a platform for mentoring women and non-binary students in Computer Science. The idea may change over time as I do research more, but ...</p>
           </div>
+
+          <div className="Card">
+            <div className="AvaTextCard">
+              <img src={Ava} className="Avatar" alt="Avatar"/>
+                <div className="PersonalInfo">
+                  <p className="UserFirstname">Khanh Nguyen</p>
+                  <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
+                  <p className="Text">Project Features:</p>
+                </div>
+            </div>
+            <p className="Text">An interdisciplinary projects to leverage technology for social goods. My current idea is to build a platform for mentoring women and non-binary students in Computer Science. The idea may change over time as I do research more, but ...</p>
+          </div>
+
+          <div className="Card">
+            <div className="AvaTextCard">
+              <img src={Ava} className="Avatar" alt="Avatar"/>
+                <div className="PersonalInfo">
+                  <p className="UserFirstname">Khanh Nguyen</p>
+                  <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
+                  <p className="Text">Project Features:</p>
+                </div>
+            </div>
+            <p className="Text">An interdisciplinary projects to leverage technology for social goods. My current idea is to build a platform for mentoring women and non-binary students in Computer Science. The idea may change over time as I do research more, but ...</p>
+          </div>
+
         </div>
 
       </div>
-
 
     </div>
   );
