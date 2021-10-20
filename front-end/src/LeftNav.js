@@ -1,14 +1,13 @@
-import MinervaLogo from './assets/MinervaLogo.svg';
 import Ava from './assets/Ava.svg';
-import './Header.css';
+import './LeftNav.css';
 
-function Header() {
+function LeftNav() {
   return (
-    <div className="Header">
+    <div className="LeftNav">
       <div className="Vertical">
         
         <div className="Horizontal">
-          <img src={MinervaLogo} className="Header-logo" alt="Header logo" />
+          <img src={MinervaLogo} className="LeftNav-logo" alt="LeftNav logo" />
           <div className="Base-horizontal"></div>
         </div>
 
@@ -26,4 +25,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default LeftNav;

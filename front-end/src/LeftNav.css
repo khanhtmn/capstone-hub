@@ -1,29 +1,61 @@
-import MinervaLogo from './assets/MinervaLogo.svg';
-import Ava from './assets/Ava.svg';
-import './Header.css';
-
-function Header() {
-  return (
-    <div className="Header">
-      <div className="Vertical">
-        
-        <div className="Horizontal">
-          <img src={MinervaLogo} className="Header-logo" alt="Header logo" />
-          <div className="Base-horizontal"></div>
-        </div>
-
-        {/* <div className="Base-vertical"></div> */}
-        <div className="AvaText">
-          <img src={Ava} className="Avatar" alt="Avatar"/>
-            <div className="Personal-info">
-              <p className="User-Firstname">Khanh</p>
-              <p className="User-Class">Class of 2022</p>
-            </div>
-        </div>
-      </div>
-
-    </div>
-  );
+.Vertical {
+  display: flex;
+  flex-direction: column;
+}
+.Horizontal {
+  display: flex;
+  flex-direction: row;
 }
 
-export default Header;
+.Header-logo {
+  width: 204px;
+  height: 40px;
+  padding: 12px;
+  background-color: #ABA9A9;
+}
+
+.Base-horizontal {
+  width: 100vw;
+  height: 64px;
+  background-color: #C4C4C4;
+}
+
+.Base-vertical {
+  width: 210px;
+  height: 100vh;
+  background-color: #C4C4C4;
+}      
+.AvaText {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 210px;
+  max-height: 162px;
+}
+
+.Avatar {
+  margin: 30px 8px 30px 8px;
+  border: 3px solid #555;
+  height: 90px;
+  width: 90px;
+}
+.Personal-info {  
+  display: flex;
+  margin: auto 3px auto 3px;
+  flex-direction: column;
+  justify-content: center;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20%;
+
+  letter-spacing: 0.02em;
+
+  color: #000000;
+}
+
+.User-Firstname {
+  font-size: 18px;
+}
