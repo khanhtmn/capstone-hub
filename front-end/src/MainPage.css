@@ -1,15 +1,15 @@
-.Header {
+.MainPage {
   display: flex;
   flex-direction: row;
 }
 
-.LeftBarVertical {
+.LeftNavBar {
   background-color: #C4C4C4;
   width: 228px;
   height: 100vh;
 }
 
-.CardBox {
+.MainBox {
   display: flex;
   flex-direction: column;
 }

@@ -1,33 +1,17 @@
-// import MinervaLogo from './assets/MinervaLogo.svg';
-// import './Header.css';
-
-// function Header() {
-//   return (
-//     <div className="Header">        
-//         {/* <div className="Horizontal"> */}
-//           <img src={MinervaLogo} className="Header-logo" alt="Header logo" />
-//           <div className="Base-horizontal"></div>
-//         {/* </div> */}
-//     </div>
-//   );
-// }
-
-// export default Header;
-
 import MinervaLogo from './assets/MinervaLogo.svg';
 import UpsideDownTriangle from './assets/UpsideDownTriangle.svg';
 import MagnifyingGlass from './assets/MagnifyingGlass.svg';
-import Ava from './assets/Ava.svg';
-import './Header.css';
+import SampleAvatar from './assets/SampleAvatar.svg';
+import './MainPage.css';
 
-function Header() {
+function MainPage() {
   return (
-    <div className="Header">
-      <div className="LeftBarVertical">
+    <div className="MainPage">
+      <div className="LeftNavBar">
         <img src={MinervaLogo} className="HeaderLogo" alt="Header logo" />
         {/* <div className="Base-vertical"></div> */}
         <div className="AvaText">
-          <img src={Ava} className="Avatar" alt="Avatar"/>
+          <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
             <div className="PersonalInfo">
               <p className="UserFirstname">Khanh</p>
               <p className="UserClass">Class of 2022</p>
@@ -35,7 +19,7 @@ function Header() {
         </div>
       </div>
 
-      <div className="CardBox">
+      <div className="MainBox">
         <div className="TopNavBar">
           <div className="SearchBar">
             <img src={MagnifyingGlass} className="MagnifyingGlass"/>
@@ -54,7 +38,7 @@ function Header() {
 
           <div className="Card">
             <div className="AvaTextCard">
-              <img src={Ava} className="Avatar" alt="Avatar"/>
+              <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
                 <div className="PersonalInfo">
                   <p className="UserFirstname">Khanh Nguyen</p>
                   <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
@@ -66,7 +50,7 @@ function Header() {
 
           <div className="Card">
             <div className="AvaTextCard">
-              <img src={Ava} className="Avatar" alt="Avatar"/>
+              <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
                 <div className="PersonalInfo">
                   <p className="UserFirstname">Khanh Nguyen</p>
                   <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
@@ -78,7 +62,7 @@ function Header() {
 
           <div className="Card">
             <div className="AvaTextCard">
-              <img src={Ava} className="Avatar" alt="Avatar"/>
+              <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
                 <div className="PersonalInfo">
                   <p className="UserFirstname">Khanh Nguyen</p>
                   <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
@@ -90,7 +74,7 @@ function Header() {
 
           <div className="Card">
             <div className="AvaTextCard">
-              <img src={Ava} className="Avatar" alt="Avatar"/>
+              <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
                 <div className="PersonalInfo">
                   <p className="UserFirstname">Khanh Nguyen</p>
                   <p className="Text">Major: CS - Applied Problem Solving | Minor: SS</p>
@@ -108,5 +92,5 @@ function Header() {
   );
 }
 
-export default Header;
+export default MainPage;
 
