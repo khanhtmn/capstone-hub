@@ -168,7 +168,7 @@ class CapstoneInfo(db.Model):
     title = db.Column(db.String(128))
     abstract = db.Column(db.String())
     keywords = db.Column(db.String())
-    feature = db.Column(db.Enum(FeatureEnum))
+    feature = db.Column(db.ArrayOfEnum(db.Enum(FeatureEnum)))
     los = db.Column(db.String())
     custom_los = db.Column(db.String())
     hsr_review = db.Column(db.Enum(HSREnum))
