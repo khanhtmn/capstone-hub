@@ -14,7 +14,7 @@ api = Api(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from models import Book
+import models
 
 @app.route("/", defaults={'path':''})
 def serve(path):
