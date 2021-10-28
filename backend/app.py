@@ -1,3 +1,6 @@
+"""
+Main app to run Flask and its API
+"""
 from flask import Flask, send_from_directory
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
@@ -18,6 +21,9 @@ import models
 
 @app.route("/", defaults={'path':''})
 def serve(path):
+    """
+    Serve main page from React
+    """
     return send_from_directory(app.static_folder,'index.html')
 
 api.add_resource(HelloApiHandler, '/flask/hello')
