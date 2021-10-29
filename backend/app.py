@@ -1,32 +1,26 @@
-"""
-Main app to run Flask and its API
-"""
-from flask import Flask, send_from_directory
-from flask_restful import Api
-from flask_cors import CORS #comment this on deployment
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from api.HelloApiHandler import HelloApiHandler
+from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 
-app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+# Globally accessible libraries
+db = SQLAlchemy()
+migrate = Migrate()
+ma = Marshmallow()
+cors = CORS()
 
-CORS(app) #comment this on deployment
-app.config.from_object('config.DevelopmentConfig')
+def create_app():
+    """Initialize the code application."""
+    app = Flask(__name__, instance_relative_config=False)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # app.config.from_object('config.Config')
 
-api = Api(app)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+    # Initialize extensions
+    db.init_app(app)
+    migrate.init_app(app, db)
+    ma.init_app(app)
+    cors.init_app(app)
 
-import models
-
-@app.route("/", defaults={'path':''})
-def serve(path):
-    """
-    Serve main page from React
-    """
-    return send_from_directory(app.static_folder,'index.html')
-
-api.add_resource(HelloApiHandler, '/flask/hello')
-
-if __name__ == "__main__":
-    app.run()
+    return app
