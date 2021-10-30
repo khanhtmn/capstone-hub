@@ -1,12 +1,16 @@
+/*
+Main page to display all projects
+*/
+
 import { useState,useEffect } from 'react'
 import MinervaLogo from './assets/MinervaLogo.svg';
 import UpsideDownTriangle from './assets/UpsideDownTriangle.svg';
 import MagnifyingGlass from './assets/MagnifyingGlass.svg';
 import SampleAvatar from './assets/SampleAvatar.svg';
-import './MainApp.css';
+import './App.css';
 import ProjectList from './Components/ProjectList'
 
-function MainApp() {
+function App() {
   const [projects, setProjects] = useState([]);
 
   // Modify the current state by setting the new data to
@@ -25,7 +29,7 @@ function MainApp() {
   },[])
 
   return (
-    <div className="MainApp m-4">
+    <div className="AppContainer">
 
       <div className="LeftNavBar">
         <img src={MinervaLogo} className="HeaderLogo" alt="Header logo" />
@@ -63,4 +67,4 @@ function MainApp() {
   );
 }
 
-export default MainApp;
+export default App;

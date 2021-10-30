@@ -1,3 +1,9 @@
+'''
+Module with all APIs and to run the app
+'''
+
+
+# Import all the necessary modules and packages
 from flask import current_app, request, jsonify, make_response
 from app import create_app, db
 from models import Login, User, Project
@@ -9,11 +15,13 @@ app = create_app()
 
 # Define a route to fetch data
 
+# Placeholder route for main page
 @app.route("/", methods=["GET"], strict_slashes=False)
 def hello():
     return "Hello"
 
 
+# API to view all projects with student information
 @app.route("/projects", methods=["GET"], strict_slashes=False)
 def projects():
     if request.method == 'GET':
