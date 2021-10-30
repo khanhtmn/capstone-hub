@@ -1,0 +1,65 @@
+.CardsCollection {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 10px;
+}
+
+.Card {
+  height: 241px;
+  width: 500px;
+  left: 0px;
+  top: 0px;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #C4C4C4;
+  overflow: hidden;
+}
+
+.AvaTextCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 500px;
+  height: 138px;
+}
+
+.Avatar {
+  margin: 30px 8px;
+  height: 90px;
+  width: 90px;
+}
+
+.PersonalInfo {  
+  display: flex;
+  margin: auto 2px auto 2px;
+  flex-direction: column;
+  justify-content: center;
+  width: 470px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20%;
+
+  letter-spacing: 0.02em;
+
+  color: #000000;
+}
+
+.UserFirstname {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+.Text {
+  font-family: Roboto;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.5);
+}

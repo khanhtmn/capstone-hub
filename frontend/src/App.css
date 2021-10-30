@@ -1,4 +1,121 @@
+.MainApp {
+  display: flex;
+  flex-direction: row;
+}
 
-.App {
-  min-height: 100vh;
+.LeftNavBar {
+  background-color: #C4C4C4;
+  width: 228px;
+  height: 100vh;
+}
+
+.MainBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.CardsCollection {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 40px;
+}
+
+.TopNavBar {
+  display: flex;
+  flex-direction: row;
+  background-color: #C4C4C4;
+  height: 69px;
+  width: 100vw;
+}
+
+.HeaderLogo {
+  width: 204px;
+  height: 173px;
+  padding: 12px;
+  background-color: #ABA9A9;
+}
+
+.SearchBar {
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  align-items: center;
+  margin: 12px 40px;
+  width: 440px;
+  height: 45px;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.MagnifyingGlass {
+  height: 16px;
+  width: 16px;
+}
+
+.Toggle {
+  display: flex;
+  flex-direction: row;
+  padding-left: 12px;
+  flex-direction: row;
+  align-items: center;
+  margin: 12px 40px;
+  width: 107px;
+  height: 45px;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.UpsideDownTriangle {
+  height: 7.5px;
+  width: 10px;
+  padding-left: 10px;
+}
+
+.AvaText {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 210px;
+  height: 162px;
+}
+
+.Avatar {
+  margin: 30px 8px;
+  height: 90px;
+  width: 90px;
+}
+
+.PersonalInfo {  
+  display: flex;
+  margin: auto 2px auto 2px;
+  flex-direction: column;
+  justify-content: center;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20%;
+
+  letter-spacing: 0.02em;
+
+  color: #000000;
+}
+
+.UserFirstname {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+.Text {
+  font-family: Roboto;
+  font-style: normal;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.5);
 }
