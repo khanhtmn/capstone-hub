@@ -195,18 +195,3 @@ for dict_to_add, table in keys:
             raise
         finally:
             db.session.close()
-
-# keys = [(Logins_to_add, Articles)]
-
-# insert data
-# for dict_to_add, table in keys:
-#     for dict_row in dict_to_add:
-#         try:
-#             stmt = table(**dict_row)
-#             db.session.add(stmt)
-#             db.session.commit()
-#         except:
-#             db.session.rollback()
-#             raise
-#         finally:
-#             db.session.close()
