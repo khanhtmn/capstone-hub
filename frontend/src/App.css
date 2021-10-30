@@ -1,4 +1,4 @@
-.MainApp {
+.AppContainer {
   display: flex;
   flex-direction: row;
 }
