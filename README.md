@@ -1,4 +1,4 @@
-# Requirements ,Usage and Installation
+# Requirements, Usage and Installation
 ## Backend - Flask
 ### Installation
                     
@@ -6,7 +6,7 @@
           
 Depending on your operating system, make a virtual environment to avoid messing with your machine's primary dependencies
 
-Note: We are cloning into the `api` branch because this is the most up-to-date branch
+Note: We are cloning into the **`api` branch** because this is the most up-to-date branch
           
 **Windows**
           
@@ -50,6 +50,8 @@ Applies for windows/macOS/Linux
 
 ### 5 .Insert the fake data - Optional for development purpose
 
+Applies for windows/macOS/Linux
+
 ```python insert.py```
 
 ### 6. Run the application 
@@ -83,4 +85,4 @@ Copy the `node_modules` dir into the `frontend` dir
 
 `npm start`
 
-Note: This README was written mainly from this [repo](https://github.com/Dev-Elie/Connecting-React-Frontend-to-a-Flask-Backend), from which has a tutorial about connecting React to Flask that I use for this project.
+Disclaimer: This README was written mainly from this [repo](https://github.com/Dev-Elie/Connecting-React-Frontend-to-a-Flask-Backend), from which has a tutorial about connecting React to Flask that I use for this project.
