@@ -1,5 +1,4 @@
-import json
-from flask import current_app, json, jsonify, request, make_response, Response
+from flask import current_app, jsonify, make_response
 from app import create_app, db
 from models import Login, User, Project
 
