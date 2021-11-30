@@ -1,12 +1,16 @@
+/*
+Main module to enter the app
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MainPage from './MainPage';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainPage />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

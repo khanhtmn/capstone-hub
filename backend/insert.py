@@ -1,6 +1,16 @@
+'''
+Fake data for development purpose
+
+Need to make sure the database schema is up to date
+(with the `manage.py` file) before running this file.
+'''
+
+
+# Import all models from `models.py`
 from models import *
 
 
+# Data for Login model
 Logins_to_add = [{
     'id': 1,
     'email': 'arshallat@uni.minerva.edu',
@@ -28,6 +38,7 @@ Logins_to_add = [{
 }]
 
 
+# Data for User model
 Users_to_add = [{
     'id': 1,
     'login_id': 1,
@@ -109,6 +120,7 @@ Users_to_add = [{
 }]
 
 
+# Data for Capstones model
 Capstones_to_add = [{
     'id': 1,
     'user_id': 1,
@@ -177,17 +189,28 @@ Capstones_to_add = [{
     'hsr_review': HSREnum.na,
 }]
 
-keys = [(Logins_to_add, Login), (Users_to_add, User), (Capstones_to_add, CapstoneInfo)]
+def insert_data():
+    """To insert data"""
 
-# insert data
-for dict_to_add, table in keys:
-    for dict_row in dict_to_add:
-        try:
-            stmt = table(**dict_row)
-            db.session.add(stmt)
-            db.session.commit()
-        except:
-            db.session.rollback()
-            raise
-        finally:
-            db.session.close()
+    # Create application context to add data to the database
+    from app import create_app
+    my_app = create_app()
+    my_app.app_context().push()
+
+    # List of keys with (list_of_data, model) to iterate
+    keys = [(Logins_to_add, Login), (Users_to_add, User), (Capstones_to_add, Project)]
+
+    # Insert data
+    for dict_to_add, table in keys:
+        for dict_row in dict_to_add:
+            try:
+                stmt = table(**dict_row)
+                db.session.add(stmt)
+                db.session.commit()
+            except:
+                db.session.rollback()
+                raise
+            finally:
+                db.session.close()
+
+insert_data()

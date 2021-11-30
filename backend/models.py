@@ -1,12 +1,17 @@
+'''
+Define models for database schema
+'''
+
+
 import enum
 from datetime import datetime
 from sqlalchemy.orm import relationship
-from app import db
+from app import db, ma
 
 
 class ClassEnum(str, enum.Enum):
     """
-    class defining enums for class year
+    Class defining enums for class year
     used in tables
     """
 
@@ -22,7 +27,7 @@ class ClassEnum(str, enum.Enum):
 
 class CollegeEnum(str, enum.Enum):
     """
-    class defining enums for majors and minors
+    Class defining enums for majors and minors
     used in tables
     """
 
@@ -35,7 +40,7 @@ class CollegeEnum(str, enum.Enum):
 
 class ConcentrationEnum(str, enum.Enum):
     """
-    class defining enums for concentrations
+    Class defining enums for concentrations
     used in tables
     """
 
@@ -74,7 +79,7 @@ class ConcentrationEnum(str, enum.Enum):
 
 class RoleEnum(str, enum.Enum):
     """
-    class defining enums for professor and student role
+    Class defining enums for professor and student role
     used in tables
     """
 
@@ -86,7 +91,7 @@ class RoleEnum(str, enum.Enum):
 
 class FeatureEnum(str, enum.Enum):
     """
-    class defining enums for project features
+    Class defining enums for project features
     used in tables
     """
 
@@ -108,7 +113,7 @@ class FeatureEnum(str, enum.Enum):
 
 class HSREnum(str, enum.Enum):
     """
-    class defining enums for HSR review status
+    Class defining enums for HSR review status
     used in tables
     """
 
@@ -125,6 +130,10 @@ class HSREnum(str, enum.Enum):
 
 
 class Login(db.Model):
+    """
+    Class defining model for user to log in
+    """
+
     __tablename__ = 'logins'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -136,6 +145,10 @@ class Login(db.Model):
 
 
 class User(db.Model):
+    """
+    Class defining model for user
+    """
+
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -158,9 +171,24 @@ class User(db.Model):
     def __repr__(self):
         return '<User info {}{}>'.format(self.firstname, self.lastname)
 
+# Generate marshmallow Schemas from the model
+class UserSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ("id","login_id", "firstname", "lastname", "role", "primary_major",
+                "secondary_major", "primary_concentration", "secondary_concentration",
+                "special_concentration", "minor", "minor_concentration")
 
-class CapstoneInfo(db.Model):
-    __tablename__ = 'capstone_info'
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
+
+
+class Project(db.Model):
+    """
+    Class defining model for Capstone project
+    """
+
+    __tablename__ = 'projects'
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
@@ -178,4 +206,14 @@ class CapstoneInfo(db.Model):
     users = relationship(User)
 
     def __repr__(self):
-        return '<Capstone info {}{}>'.format(self.title)
+        return '<Capstone info {}>'.format(self.title)
+
+# Generate marshmallow Schemas from the model
+class ProjectSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ("id","user_id", "title", "abstract", "keywords", "feature",
+                "los", "custom_los", "hsr_review", "last_updated")
+
+project_schema = ProjectSchema()
+projects_schema = ProjectSchema(many=True)
