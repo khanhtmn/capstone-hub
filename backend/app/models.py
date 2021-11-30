@@ -137,12 +137,11 @@ class Login(db.Model):
     __tablename__ = 'logins'
 
     id = db.Column(db.Integer, primary_key=True)
-    public_id = db.Column(db.Integer) 
     email = db.Column(db.String(120), index=True, unique=True)
-    password = db.Column(db.String(128)) # hashed_password
+    password_hash = db.Column(db.String(128))
 
-    # def __repr__(self):
-    #     return '<Login user {}>'.format(self.email)
+    def __repr__(self):
+        return '<Login user {}>'.format(self.email)
 
 
 class User(db.Model):
