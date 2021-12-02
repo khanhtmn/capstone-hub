@@ -8,8 +8,8 @@ Module with all APIs and to run the app
 import jwt
 import uuid
 from flask import current_app, json, request, jsonify, make_response, abort
-from .app import create_app, db
-from .models import Login, User, Project
+from app import create_app, db
+from models import Login, User, Project
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 # import werkzeug
