@@ -11,7 +11,7 @@ Note: We are cloning into the **`api` branch** because this is the most up-to-da
 **Windows**
           
 ```bash
-git clone --branch api https://github.com/khanhtmn/capstone-hub.git
+git clone --branch auth https://github.com/khanhtmn/capstone-hub.git
 cd capstone-hub/backend
 py -3 -m venv venv
 ```
@@ -19,7 +19,7 @@ py -3 -m venv venv
 **macOS/Linux**
           
 ```bash
-git clone --branch api https://github.com/khanhtmn/capstone-hub.git
+git clone --branch auth https://github.com/khanhtmn/capstone-hub.git
 cd capstone-hub/backend
 python3 -m venv venv
 ```
