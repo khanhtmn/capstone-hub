@@ -23,6 +23,7 @@ def create_app():
     # Use SQLite for now, will switch to PostgreSQL later
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = "Th1s1ss3cr3t"
 
     # We will have this config file later in the future
     # app.config.from_object('config.Config')

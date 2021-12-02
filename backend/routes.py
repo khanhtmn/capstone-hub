@@ -84,10 +84,9 @@ def login_user():
 
     try:
         user = Login.query.filter_by(email=auth.username).first()
-
+        
         if check_password_hash(user.password, auth.password):
             token = jwt.encode({'public_id': user.public_id}, app.config['SECRET_KEY'], algorithm="HS256")
-            print(type(token), "TYPE")
             return jsonify({'token': token})
             # https://stackoverflow.com/questions/48570320/how-to-send-and-receive-jwt-token
             # return jsonify({'token': jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])})
