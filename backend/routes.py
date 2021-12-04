@@ -258,5 +258,117 @@ def update_project_by_id(current_user, project_id):
         except Exception as e:
             return(str(e))
 
+
+#### USER PAGE ####
+
+# API to view user by id
+@app.route("/users/<int:user_id>", methods=["GET"])
+@token_required
+def get_user_by_id(current_user, user_id):
+    """
+    Get user by id
+    :param current_user: The user who is making the get request
+    :param user_id: Id of the user to view
+    :return: User details
+    """
+
+    if request.method == 'GET':
+        try:
+            user_info = User.query\
+                .filter(User.id==user_id)\
+                .join(Project, Project.user_id==User.id)\
+                .add_columns(User.firstname, User.lastname,User.primary_major,\
+                    User.secondary_major, User.minor,User.primary_concentration,\
+                    Project.title, Project.abstract,Project.keywords, Project.feature,\
+                    Project.los,Project.custom_los,Project.hsr_review, Project.last_updated)\
+                .first()
+            data = {
+                "firstname": user_info.firstname,
+                "lastname": user_info.lastname,
+                "primary_major": user_info.primary_major,
+                "secondary_major": user_info.secondary_major,
+                "minor": user_info.minor,
+                "primary_concentration": user_info.primary_concentration,
+                "title": user_info.title,
+                "abstract": user_info.abstract,
+                "keywords": user_info.keywords,
+                "feature": user_info.feature,
+                "los": user_info.los,
+                "custom_los": user_info.custom_los,
+                "hsr_review": user_info.hsr_review,
+                "last_updated": user_info.last_updated,
+            }
+            response = make_response(jsonify(data=data, status=200))
+
+            return response
+
+        except Exception as e:
+            return(str(e))
+
+
+# API to edit user by id
+@app.route("/users/<int:user_id>", methods=["PUT"])
+@token_required
+def update_user_by_id(current_user, user_id):
+    if request.method == 'PUT':
+        """
+        Get user by id
+        :param current_user: The user who is making the update request
+        :param user_id: Id of the user to update
+        :return: Success message if current_user.id == user_id
+        """
+
+        try:
+            user_info = User.query\
+                .filter(User.id==user_id)\
+                .first()
+
+            if user_info.id == current_user.id:
+
+                request_data = request.get_json()
+
+                if request_data:
+                    if 'firstname' in request_data:
+                        user_info.firstname = request_data['firstname']
+
+                    if 'lastname' in request_data:
+                        user_info.lastname = request_data['lastname']
+
+                    if 'role' in request_data:
+                        user_info.role = request_data['role']
+
+                    if 'primary_major' in request_data:
+                        user_info.primary_major = request_data['primary_major']
+
+                    if 'secondary_major' in request_data:
+                        user_info.secondary_major = request_data['secondary_major']
+
+                    if 'primary_concentration' in request_data:
+                        user_info.primary_concentration = request_data['primary_concentration']
+
+                    if 'secondary_concentration' in request_data:
+                        user_info.secondary_concentration = request_data['secondary_concentration']
+
+                    if 'special_concentration' in request_data:
+                        user_info.special_concentration = request_data['special_concentration']
+
+                    if 'minor' in request_data:
+                        user_info.minor = request_data['minor']
+
+                    if 'minor_concentration' in request_data:
+                        user_info.minor_concentration = request_data['minor_concentration']
+
+                    user_info.last_updated = datetime.utcnow()
+                    db.session.commit()
+
+                response = make_response(jsonify(data="Success", status=200))
+                return response
+
+            else:
+                abort(403, description="Doesn't have the privilege to update user info")
+
+        except Exception as e:
+            return(str(e))
+
 if __name__ == "__main__":
     app.run(debug=True)
