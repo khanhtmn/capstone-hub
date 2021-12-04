@@ -4,7 +4,6 @@ Module with all APIs and to run the app
 
 
 # Import all the necessary modules and packages
-# from flask import abort
 import jwt
 import uuid
 from flask import current_app, json, request, jsonify, make_response, abort
@@ -105,7 +104,6 @@ def login_user():
 # Define a route to fetch data
 
 # Placeholder route for main page
-# @app.route("/", methods=["GET"], strict_slashes=False)
 @app.route("/", methods=["GET"])
 @token_required
 def hello(current_user):
@@ -259,6 +257,73 @@ def update_project_by_id(current_user, project_id):
             return(str(e))
 
 
+# API to create project info
+@app.route("/projects", methods=["POST"])
+@token_required
+def create_new_project(current_user):
+    if request.method == 'POST':
+        """
+        Create new project info
+        :param current_user: The user who is making the post request
+        :return: Success message for the creation of new project info
+        """
+
+        try:
+            user = User.query\
+                .filter(User.id==current_user.id)\
+                .first()
+
+            if user:
+
+                request_data = request.get_json()
+
+                title = None
+                abstract = None
+                keywords = None
+                feature = None
+                los = None
+                custom_los = None
+                hsr_review = None
+
+                if request_data:
+                    if 'title' in request_data:
+                        title = request_data['title']
+
+                    if 'abstract' in request_data:
+                        abstract = request_data['abstract']
+
+                    if 'keywords' in request_data:
+                        keywords = request_data['keywords']
+
+                    if 'feature' in request_data:
+                        feature = request_data['feature']
+
+                    if 'los' in request_data:
+                        los = request_data['los']
+
+                    if 'custom_los' in request_data:
+                        custom_los = request_data['custom_los']
+
+                    if 'hsr_review' in request_data:
+                        hsr_review = request_data['hsr_review']
+
+                    new_project = Project(user_id=current_user.id, title=title, abstract=abstract,\
+                                keywords=keywords, feature=feature, los=los, custom_los=custom_los,\
+                                hsr_review=hsr_review)
+                    db.session.add(new_project)
+                    db.session.commit()
+
+                    data = {'message': 'Project information saved successfully'}
+                    response = make_response(jsonify(data=data, status=201))
+                    return response
+
+            else:
+                abort(404, description="Cannot find user profile. Please create your profile info and come back here")
+
+        except Exception as e:
+            return(str(e))
+
+
 #### USER PAGE ####
 
 # API to view user by id
@@ -369,6 +434,89 @@ def update_user_by_id(current_user, user_id):
 
         except Exception as e:
             return(str(e))
+
+
+# API to create user info
+@app.route("/users", methods=["POST"])
+@token_required
+def create_new_user(current_user):
+    if request.method == 'POST':
+        """
+        Create new user profile
+        :param current_user: The user who is making the post request
+        :return: Success message for the creation of new user profile
+        """
+
+        try:
+            login_id = Login.query\
+                .filter(Login.id==current_user.id)\
+                .first()
+
+            if login_id:
+
+                request_data = request.get_json()
+
+                firstname = None
+                lastname = None
+                role = None
+                primary_major = None
+                secondary_major = None
+                primary_concentration = None
+                secondary_concentration = None
+                special_concentration = None
+                minor = None
+                minor_concentration = None
+
+                if request_data:
+                    if 'firstname' in request_data:
+                        firstname = request_data['firstname']
+
+                    if 'lastname' in request_data:
+                        lastname = request_data['lastname']
+
+                    if 'role' in request_data:
+                        role = request_data['role']
+
+                    if 'primary_major' in request_data:
+                        primary_major = request_data['primary_major']
+
+                    if 'secondary_major' in request_data:
+                        secondary_major = request_data['secondary_major']
+
+                    if 'primary_concentration' in request_data:
+                        primary_concentration = request_data['primary_concentration']
+
+                    if 'secondary_concentration' in request_data:
+                        secondary_concentration = request_data['secondary_concentration']
+
+                    if 'special_concentration' in request_data:
+                        special_concentration = request_data['special_concentration']
+
+                    if 'minor' in request_data:
+                        minor = request_data['minor']
+
+                    if 'minor_concentration' in request_data:
+                        minor_concentration = request_data['minor_concentration']
+
+                    new_user = User(login_id=current_user.id, firstname=firstname, lastname=lastname,\
+                                role=role, primary_major=primary_major, secondary_major=secondary_major,\
+                                primary_concentration=primary_concentration,\
+                                secondary_concentration=secondary_concentration,\
+                                special_concentration=special_concentration,\
+                                minor=minor, minor_concentration=minor_concentration)
+                    db.session.add(new_user)
+                    db.session.commit()
+
+                    data = {'message': 'User profile created successfully'}
+                    response = make_response(jsonify(data=data, status=201))
+                    return response
+
+            else:
+                abort(404, description="Cannot find login info. Please register an account and sign in first")
+
+        except Exception as e:
+            return(str(e))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
