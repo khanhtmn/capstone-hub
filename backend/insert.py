@@ -14,27 +14,27 @@ from models import *
 Logins_to_add = [{
     'id': 1,
     'email': 'arshallat@uni.minerva.edu',
-    'password_hash': '',
+    'password': '',
 }, {
     'id': 2,
     'email': 'dragoncy@uni.minerva.edu',
-    'password_hash': '',
+    'password': '',
 }, {
     'id': 3,
     'email': 'elisha@uni.minerva.edu',
-    'password_hash': '',
+    'password': '',
 }, {
     'id': 4,
     'email': 'theemskerk@uni.minerva.edu',
-    'password_hash': '',
+    'password': '',
 }, {
     'id': 5,
     'email': 'abigail.gust@uni.minerva.edu',
-    'password_hash': '',
+    'password': '',
 }, {
     'id': 6,
     'email': 'alya@uni.minerva.edu',
-    'password_hash': '',
+    'password': '',
 }]
 
 

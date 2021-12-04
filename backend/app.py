@@ -20,12 +20,8 @@ def create_app():
     """Initialize the code application."""
     app = Flask(__name__, instance_relative_config=False)
     
-    # Use SQLite for now, will switch to PostgreSQL later
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    # We will have this config file later in the future
-    # app.config.from_object('config.Config')
+    # Load config from config files
+    app.config.from_pyfile('config.py')
 
     # Initialize extensions
     db.init_app(app)

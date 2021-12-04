@@ -5,13 +5,11 @@
 ### 1 .Clone the git repo and create an environment 
           
 Depending on your operating system, make a virtual environment to avoid messing with your machine's primary dependencies
-
-Note: We are cloning into the **`api` branch** because this is the most up-to-date branch
           
 **Windows**
           
 ```bash
-git clone --branch api https://github.com/khanhtmn/capstone-hub.git
+git clone https://github.com/khanhtmn/capstone-hub.git
 cd capstone-hub/backend
 py -3 -m venv venv
 ```
@@ -19,7 +17,7 @@ py -3 -m venv venv
 **macOS/Linux**
           
 ```bash
-git clone --branch api https://github.com/khanhtmn/capstone-hub.git
+git clone --branch auth https://github.com/khanhtmn/capstone-hub.git
 cd capstone-hub/backend
 python3 -m venv venv
 ```
