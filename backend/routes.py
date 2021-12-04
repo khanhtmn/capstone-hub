@@ -12,11 +12,13 @@ from app import create_app, db
 from models import Login, User, Project
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
-# import werkzeug
+from datetime import datetime
 
 # Create an application instance
 app = create_app()
 
+
+#### AUTHENTICATION ####
 
 def token_required(f):
     @wraps(f)
@@ -45,7 +47,7 @@ def token_required(f):
 
 
 # API to register new user
-@app.route("/register", methods=["POST"], strict_slashes=False)
+@app.route("/register", methods=["POST"])
 def register_user():
     email = request.json.get("email") # Test if this is the right way to get info
     password = request.json.get("password")
@@ -72,7 +74,7 @@ def register_user():
     return response
 
 # API to authenticate
-@app.route("/login", methods=["GET", "POST"], strict_slashes=False)
+@app.route("/login", methods=["GET", "POST"])
 def login_user():
 
     auth = request.authorization
@@ -103,16 +105,24 @@ def login_user():
 # Define a route to fetch data
 
 # Placeholder route for main page
-@app.route("/", methods=["GET"], strict_slashes=False)
+# @app.route("/", methods=["GET"], strict_slashes=False)
+@app.route("/", methods=["GET"])
 @token_required
 def hello(current_user):
     return "Hello"
 
 
+#### PROJECT PAGE ####
+
 # API to view all projects with student information
-@app.route("/projects", methods=["GET"], strict_slashes=False)
+@app.route("/projects", methods=["GET"])
 @token_required
 def projects(current_user):
+    """
+    Get all projects
+    :param current_user: The user who is making the get request
+    :return: Details of all projects
+    """
     if request.method == 'GET':
         try:
             data = []
@@ -140,6 +150,110 @@ def projects(current_user):
             response = make_response(jsonify(data=data, status=200))
 
             return response
+
+        except Exception as e:
+            return(str(e))
+
+
+# API to view project by id
+@app.route("/projects/<int:project_id>", methods=["GET"])
+@token_required
+def get_project_by_id(current_user, project_id):
+    """
+    Get project by id
+    :param current_user: The user who is making the get request
+    :param project_id: Id of the project
+    :return: Project details
+    """
+
+    if request.method == 'GET':
+        try:
+            project_info = Project.query\
+                .filter(Project.id==project_id)\
+                .join(User, Project.user_id==User.id)\
+                .add_columns(Project.id, Project.user_id, User.firstname, User.lastname,\
+                    User.primary_major,User.secondary_major, User.minor,\
+                    User.primary_concentration,Project.title, Project.abstract,\
+                    Project.keywords, Project.feature, Project.los,Project.custom_los,\
+                    Project.hsr_review, Project.last_updated)\
+                .first()
+            data = {
+                    "id": project_info.id,
+                    "user_id": project_info.user_id,
+                    "firstname": project_info.firstname,
+                    "lastname": project_info.lastname,
+                    "primary_major": project_info.primary_major,
+                    "secondary_major": project_info.secondary_major,
+                    "minor": project_info.minor,
+                    "primary_concentration": project_info.primary_concentration,
+                    "title": project_info.title,
+                    "abstract": project_info.abstract,
+                    "keywords": project_info.keywords,
+                    "feature": project_info.feature,
+                    "los": project_info.los,
+                    "custom_los": project_info.custom_los,
+                    "hsr_review": project_info.hsr_review,
+                    "last_updated": project_info.last_updated,
+            }
+            response = make_response(jsonify(data=data, status=200))
+
+            return response
+
+        except Exception as e:
+            return(str(e))
+
+
+# API to edit project by id
+@app.route("/projects/<int:project_id>", methods=["PUT"])
+@token_required
+def update_project_by_id(current_user, project_id):
+    if request.method == 'PUT':
+        """
+        Update project by id
+        :param current_user: The user who is making the update request
+        :param project_id: Id of the project
+        :return: Success message if current_user.id == project.user_id
+        """
+
+        try:
+            project_info = Project.query\
+                .filter(Project.id==project_id)\
+                .first()
+            
+            if project_info.user_id == current_user.id:
+
+                request_data = request.get_json()
+
+                if request_data:
+                    if 'title' in request_data:
+                        project_info.title = request_data['title']
+
+                    if 'abstract' in request_data:
+                        project_info.abstract = request_data['abstract']
+
+                    if 'keywords' in request_data:
+                        project_info.keywords = request_data['keywords']             
+
+                    if 'feature' in request_data:
+                        project_info.feature = request_data['feature']
+
+                    if 'los' in request_data:
+                        project_info.los = request_data['los']
+
+                    if 'custom_los' in request_data:
+                        project_info.custom_los = request_data['custom_los']    
+
+                    if 'hsr_review' in request_data:
+                        project_info.hsr_review = request_data['hsr_review']
+
+                    project_info.last_updated = datetime.utcnow()
+                    db.session.commit()
+
+                response = make_response(jsonify(data="Success", status=200))
+                return response
+
+            else:
+                abort(403, description="Doesn't have the privilege to update the project")
 
         except Exception as e:
             return(str(e))
