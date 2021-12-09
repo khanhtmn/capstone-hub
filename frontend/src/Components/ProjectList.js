@@ -1,12 +1,37 @@
+import { useState,useEffect } from 'react'
 import SampleAvatar from './../assets/SampleAvatar.svg';
 import './ProjectList.css';
 
-const ProjectList = (props) => {
+const ProjectList = () => {
+  const [projects, setProjects] = useState([]);
 
+  // Modify the current state by setting the new data to
+  // the response from the backend
+  useEffect(()=>{
+    const token = localStorage.getItem("token")
+    if (token) {
+      fetch('http://localhost:5000/projects',{
+        'methods':'GET',
+        headers : {
+          'Content-Type':'application/json',
+          'x-access-tokens':localStorage.getItem("token")
+        }
+      })
+      .then(response => response.json())
+      .then(response => setProjects(response.data))
+      .catch(error => console.log(error))
+    }
+    else {
+      window.history.pushState({}, undefined, "/login")
+      window.location.reload() 
+    }
+  },[])
+  console.log(projects)
+  // console.log(localStorage.getItem("token"))
   return (
     <div className="CardsCollection">
     {/* Display the project details if project is not None */} 
-     {props.projects && props.projects.map(project =>{
+     {projects?.map(project =>{
         const abstract_trunc = project.abstract.slice(0, 200)
         return (
 
