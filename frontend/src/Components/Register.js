@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from "react";
-import './Login.css';
+import './Register.css';
 
 const base64 = require('base-64');
 
-const Login = (props) => {
+const Register = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const onSubmitClick = (e)=>{
     e.preventDefault()
-    console.log("You pressed login")
+    console.log("You pressed Register")
     let opts = {
       'username': username,
       'password': password
     }
     console.log(opts)
-    fetch('/login', {
-      method: 'post',
-      headers: new Headers({
-        "Authorization": "Basic " + `${base64.encode(`${username}:${password}`)}`
-      })
+    fetch('/register', {
+      method: 'POST',
+      body: JSON.stringify(opts)
     }).then(r => r.json())
-      .then(token => {
-        if (token){
-          console.log(token)
-          localStorage.setItem("token", token["token"])
-          window.history.pushState({}, undefined, "/")
-          window.location.reload()
-        }
-        else {
-          console.log("Please type in correct username/password")
-        }
+      .then(data => {
+        console.log("Here is the data", data)
+        // if (Response.status==201){
+        //   console.log(username)
+        //   window.history.pushState({}, undefined, "/login")
+        //   window.location.reload()
+        // }
+        // else {
+        //   console.log("Please use Minerva address")
+        // }
       })
   }
 
@@ -45,7 +43,7 @@ const Login = (props) => {
   return (
     <div className="BigBox">
       <div className="SmallBox">
-        <p>Login to Your Account</p>
+        <p>Register Your New Account</p>
         <form action="#">
           <p>Email</p>
           <div>
@@ -65,7 +63,7 @@ const Login = (props) => {
             />
           </div>
           <button onClick={onSubmitClick} type="submit">
-            Login
+            Register
           </button>
         </form>
       </div>
@@ -73,4 +71,4 @@ const Login = (props) => {
   )
 }
 
-export default Login;
+export default Register;

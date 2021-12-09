@@ -1,25 +1,39 @@
 import React, { useEffect, useState } from "react";
-import './Login.css';
+import './CreateUser.css';
 
 const base64 = require('base-64');
 
-const Login = (props) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+const CreateUser = (props) => {
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [role, setRole] = useState('')
+  const [primaryMajor, setPrimaryMajor] = useState('')
+  const [secondaryMajor, setSecondaryMajor] = useState('')
+  const [primaryConcentration, setPrimaryConcentration] = useState('')
+  const [secondaryConcentration, setSecondaryConcentration] = useState('')
+  const [specialConcentration, setSpecialConcentration] = useState('')
+  const [minor, setMinor] = useState('')
+  const [minorConcentration, setMinorConcentration] = useState('')
 
   const onSubmitClick = (e)=>{
     e.preventDefault()
-    console.log("You pressed login")
+    console.log("You pressed Create New User")
     let opts = {
-      'username': username,
-      'password': password
+      'firstname': firstname,
+      'lastname': lastname,
+      'role': role,
+      'primary_major': primaryMajor,
+      'secondary_major': secondaryMajor,
+      'primary_concentration': primaryConcentration,
+      'secondary_concentration': secondaryConcentration,
+      'special_concentration': specialConcentration,
+      'minor': minor,
+      'minor_concentration': minorConcentration,
     }
     console.log(opts)
-    fetch('/login', {
+    fetch('/users', {
       method: 'post',
-      headers: new Headers({
-        "Authorization": "Basic " + `${base64.encode(`${username}:${password}`)}`
-      })
+      body: JSON.stringify(opts)
     }).then(r => r.json())
       .then(token => {
         if (token){
@@ -45,7 +59,7 @@ const Login = (props) => {
   return (
     <div className="BigBox">
       <div className="SmallBox">
-        <p>Login to Your Account</p>
+        <p>CreateUser to Your Account</p>
         <form action="#">
           <p>Email</p>
           <div>
@@ -65,7 +79,7 @@ const Login = (props) => {
             />
           </div>
           <button onClick={onSubmitClick} type="submit">
-            Login
+            CreateUser
           </button>
         </form>
       </div>
@@ -73,4 +87,4 @@ const Login = (props) => {
   )
 }
 
-export default Login;
+export default CreateUser;

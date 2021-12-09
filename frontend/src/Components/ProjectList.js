@@ -27,7 +27,6 @@ const ProjectList = () => {
     }
   },[])
   console.log(projects)
-  // console.log(localStorage.getItem("token"))
   return (
     <div className="CardsCollection">
     {/* Display the project details if project is not None */} 
