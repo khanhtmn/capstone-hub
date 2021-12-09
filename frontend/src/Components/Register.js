@@ -11,24 +11,27 @@ const Register = (props) => {
     e.preventDefault()
     console.log("You pressed Register")
     let opts = {
-      'username': username,
+      'email': username,
       'password': password
     }
     console.log(opts)
     fetch('/register', {
       method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+      },
       body: JSON.stringify(opts)
     }).then(r => r.json())
       .then(data => {
         console.log("Here is the data", data)
-        // if (Response.status==201){
-        //   console.log(username)
-        //   window.history.pushState({}, undefined, "/login")
-        //   window.location.reload()
-        // }
-        // else {
-        //   console.log("Please use Minerva address")
-        // }
+        if (data.status==201){
+          console.log(username)
+          window.history.pushState({}, undefined, "/login")
+          window.location.reload()
+        }
+        else {
+          console.log("Please enter email or password or use Minerva address")
+        }
       })
   }
 

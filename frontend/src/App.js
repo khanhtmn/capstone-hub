@@ -16,6 +16,7 @@ import ProjectList from './Components/ProjectList'
 import Login from './Components/Login';
 import TopNavBar from './Components/TopNavBar';
 import LeftNavBar from './Components/LeftNavBar';
+import Register from "./Components/Register";
 
 function App() {
 
@@ -25,17 +26,19 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Routes>
+        <Route element={
+            <Register/>
+          } path="/register">
+          </Route>
+
           <Route element={
             <Login/>
           } path="/login">
           </Route>
+
           <Route element={
             <ProjectList/>
-          } path="/projects">
-
-          </Route>
-          <Route element={
-            <h1>Hehe</h1>
+            // <h1>Hehe</h1>
           } path="/">
           </Route>
         </Routes>
