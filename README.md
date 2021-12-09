@@ -52,7 +52,34 @@ Applies for windows/macOS/Linux
 
 ```python insert.py```
 
-### 6. Run the application 
+### 6 .Add config and environment file
+
+Create the following files in the `backend` directory: `.env`, `.flaskenv`, `config.py`
+
+`.env`
+```
+SQLALCHEMY_DATABASE_URI=sqlite:///database.db
+SQLALCHEMY_TRACK_MODIFICATIONS=False
+SECRET_KEY=Th1s1ss3cr3t
+```
+
+`.flaskenv`
+```
+FLASK_APP=routes.py
+FLASK_DEBUG=1
+FLASK_ENV=development
+```
+
+`config.py`
+```
+"""Flask configuration."""
+
+SQLALCHEMY_DATABASE_URI = "sqlite:///database.db"
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SECRET_KEY = "Th1s1ss3cr3t"
+```
+
+### 7. Run the application 
 
 **For linux and macOS**
 Start the application by running:
@@ -68,19 +95,11 @@ OR
 `python routes.py`
 
 ## Frontend - React
-### Installation
-
-This section involves creating of a new react app,then moving the `node_modules` directory into the `frontend` directory
-
-> You can manoeuvre around this in any way you find suitable provided you have `node_modules` directory inside the `frontend` dir.
 
 ```
 cd capstone-hub/frontend
-npx create-react-app capstone-database
-cd capstone-database
+npm install
+npm start
 ```
-Copy the `node_modules` dir into the `frontend` dir
-
-`npm start`
 
 Disclaimer: This README was written mainly from this [repo](https://github.com/Dev-Elie/Connecting-React-Frontend-to-a-Flask-Backend), from which has a tutorial about connecting React to Flask that I use for this project.
