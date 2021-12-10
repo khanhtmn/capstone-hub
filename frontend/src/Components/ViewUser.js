@@ -38,23 +38,47 @@ const ViewUser = () => {
       <LeftNavBar/>
       <div className="ColumnOuter">
         <TopNavBar/>
-        <div className="CardsCollection">
+        <div className="UserCardsCollection">
           {/* Display the project details if project is not None */}
-          {/* {users?.map(user =>{
+          {users?.map(user =>{
               return (
-                <div className="Card" key= {user.id}>
-                <div className="AvaTextCard">
+                <div className="UserCard" key= {user.id}>
+                  <div className="UserAvaTextCard">
                     <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
-                      <div className="PersonalInfo">
+                      <div className="UserPersonalInfo">
                         <p className="UserFirstname">{user.firstname} {user.lastname}</p>
-                        <p className="Text">Major: {user.primary_major} - {user.primary_concentration} | Minor: {user.minor}</p>
+                        <p className="UserText">Primary Major: {user.primary_major} - {user.primary_concentration}</p>
+                        <p className="UserText">Secondary Major: {user.secondary_major} - {user.secondary_concentration}</p>
+                        <p className="UserText">Minor: {user.minor} - {user.minor_concentration}</p>
                       </div>
                   </div>
-                <hr/>
+                {/* <hr/> */}
+                  <p className="UserHeading">Project Title</p>
+                  <p>{user.title}</p>
+                  <p className="UserHeading">Project Description</p>
+                  <p>{user.abstract}</p>
+                  <p className="UserHeading">Project Features</p>
+                  <p>{user.feature}</p>
+                  <p className="UserHeading">Keywords</p>
+                  <p>{user.keywords}</p>
+                  <p className="UserHeading">LOs</p>
+                  <p>{user.los}</p>
+                  <p className="UserHeading">Custom LO</p>
+                  <p>{user.custom_los}</p>
+                  <p className="UserHeading">HSR Review</p>
+                  <p>{user.hsr_review}</p>
+                  <p className="UserHeading">Last updated</p>
+                  <p>{user.last_updated}</p>
+                  <p className="UserHeading">External Dependencies</p>
+                  <p className="UserHeading">Section</p>
+                  <p className="UserHeading">Knowledge/Skill to Offer</p>
+                  <p className="UserHeading">Knowledge/Skill to Request</p>
+                  <p className="UserHeading">Commitment</p>
+                  <p className="UserHeading">Other ideas</p>
                 </div>
               )
 
-              })} */}
+          })}
         </div>
       </div>
     </div>

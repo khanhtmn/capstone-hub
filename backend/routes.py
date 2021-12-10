@@ -77,7 +77,6 @@ def register_user():
 def login_user():
 
     auth = request.authorization
-
     if not auth or not auth.username or not auth.password:
         data = {'message': 'Could not verify yes', 'WWW.Authentication': 'Basic realm: "login required"'}
         response = make_response(jsonify(data=data, status=401))
@@ -347,7 +346,7 @@ def get_user_by_id(current_user, user_id):
                     Project.title, Project.abstract,Project.keywords, Project.feature,\
                     Project.los,Project.custom_los,Project.hsr_review, Project.last_updated)\
                 .first()
-            data = {
+            data = [{
                 "firstname": user_info.firstname,
                 "lastname": user_info.lastname,
                 "primary_major": user_info.primary_major,
@@ -362,7 +361,7 @@ def get_user_by_id(current_user, user_id):
                 "custom_los": user_info.custom_los,
                 "hsr_review": user_info.hsr_review,
                 "last_updated": user_info.last_updated,
-            }
+            }]
             response = make_response(jsonify(data=data, status=200))
 
             return response
