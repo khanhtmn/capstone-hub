@@ -1,0 +1,38 @@
+.BigBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40vmax;
+  width: 100vmax;
+}
+
+.SmallBox {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  height: 350px;
+  width: 350px;
+  left: 0px;
+  top: 0px;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #C4C4C4;
+  overflow: hidden;
+}
+
+.p {
+  width: 292px;
+  height: 38px;
+  
+  font-family: Montserrat;
+  font-style: bold;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 150%;
+  
+  letter-spacing: 0.02em;
+  
+  color: #000000;
+}

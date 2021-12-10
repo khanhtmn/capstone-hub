@@ -1,7 +1,6 @@
 .RowOuter {
   display: flex;
   flex-direction: row;
-  /* width: 100%; */
 }
 
 .ColumnOuter {
@@ -9,26 +8,15 @@
   flex-direction: column;
 }
 
-button {
-  width: 200px;
-  height: 50px;
-}
-
-.buttonDecor {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.CardsCollection {
+.UserCardsCollection {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 10px;
+  padding-left: 220px;
 }
 
-.Card {
-  height: 241px;
-  width: 500px;
+.UserCard {
+  height: 100%;
+  width: 700px;
   left: 0px;
   top: 0px;
   border-radius: 8px;
@@ -38,12 +26,12 @@ button {
   overflow: hidden;
 }
 
-.AvaTextCard {
+.UserAvaTextCard {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 500px;
-  height: 138px;
+  height: auto;
 }
 
 .Avatar {
@@ -52,9 +40,10 @@ button {
   width: 90px;
 }
 
-.PersonalInfo {  
+.UserPersonalInfo {  
   display: flex;
-  margin: auto 2px auto 2px;
+  margin: auto 10px auto 10px;
+  padding: 20px 20px 20px 5px;
   flex-direction: column;
   justify-content: center;
   width: 470px;
@@ -70,11 +59,6 @@ button {
   color: #000000;
 }
 
-.PersonalInfo a{
-  text-decoration: none;
-  color: black;
-}
-
 .UserFirstname {
   font-family: Roboto;
   font-style: normal;
@@ -83,10 +67,26 @@ button {
   letter-spacing: 0.02em;
 }
 
-.Text {
+.UserHeading {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  columns: black;
+}
+
+.UserText {
+  width: 500px;
+  height: auto;
   font-family: Roboto;
   font-style: normal;
+  font-weight: 500;
   font-size: 14px;
+  line-height: 130%;  
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.5);
 }
+
