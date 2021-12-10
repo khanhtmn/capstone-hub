@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import './CreateUser.css';
+import './CreateUser.css'
 
 const base64 = require('base-64');
 
-const CreateUser = (props) => {
+const CreateUser = () => {
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [role, setRole] = useState('')
@@ -32,54 +32,173 @@ const CreateUser = (props) => {
     }
     console.log(opts)
     fetch('/users', {
-      method: 'post',
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+        'x-access-tokens':localStorage.getItem("token")
+      },
       body: JSON.stringify(opts)
-    }).then(r => r.json())
-      .then(token => {
-        if (token){
-          console.log(token)
-          localStorage.setItem("token", token["token"])
+    }).then(response => response.json())
+      .then(data => {
+        console.log("Here is the submitted data", data)
+        if (data.status==201){
+          console.log(firstname, lastname)
           window.history.pushState({}, undefined, "/")
           window.location.reload()
         }
         else {
-          console.log("Please type in correct username/password")
+          console.log("Error has occured")
         }
       })
   }
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value)
+  const handleFirstnameChange = (e) => {
+    setFirstname(e.target.value)
   }
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value)
+  const handleLastnameChange = (e) => {
+    setLastname(e.target.value)
+  }
+
+  const handleRoleChange = (e) => {
+    setRole(e.target.value)
+  }
+
+  const handlePrimaryMajorChange = (e) => {
+    setPrimaryMajor(e.target.value)
+  }
+
+  const handleSecondaryMajorChange = (e) => {
+    setSecondaryMajor(e.target.value)
+  }
+
+  const handlePrimaryConcentrationChange = (e) => {
+    setPrimaryConcentration(e.target.value)
+  }
+
+  const handleSecondaryConcentrationChange = (e) => {
+    setSecondaryConcentration(e.target.value)
+  }
+
+  const handleSpecialConcentrationChange = (e) => {
+    setSpecialConcentration(e.target.value)
+  }
+
+  const handleMinorChange = (e) => {
+    setMinor(e.target.value)
+  }
+
+  const handleMinorConcentrationChange = (e) => {
+    setMinorConcentration(e.target.value)
   }
 
   return (
     <div className="BigBox">
       <div className="SmallBox">
-        <p>CreateUser to Your Account</p>
+        <p>Let's create your profile</p>
         <form action="#">
-          <p>Email</p>
+
+          <p>Firstname</p>
           <div>
             <input type="text" 
-              placeholder="Email" 
-              onChange={handleUsernameChange}
-              value={username} 
+              placeholder="Firstname" 
+              onChange={handleFirstnameChange}
+              value={firstname} 
             />
           </div>
-          <p>Password</p>
+
+          <p>Lastname</p>
           <div>
             <input
-              type="password"
-              placeholder="Password"
-              onChange={handlePasswordChange}
-              value={password}
+              type="text"
+              placeholder="Lastname"
+              onChange={handleLastnameChange}
+              value={lastname}
             />
           </div>
+
+          <p>Role</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Role"
+              onChange={handleRoleChange}
+              value={role}
+            />
+          </div>
+
+          <p>Primary Major</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Primary Major"
+              onChange={handlePrimaryMajorChange}
+              value={primaryMajor}
+            />
+          </div>
+
+          <p>Secondary Major</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Secondary Major"
+              onChange={handleSecondaryMajorChange}
+              value={secondaryMajor}
+            />
+          </div>
+
+          <p>Primary Concentration</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Primary Concentration"
+              onChange={handlePrimaryConcentrationChange}
+              value={primaryConcentration}
+            />
+          </div>
+
+          <p>Secondary Concentration</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Secondary Concentration"
+              onChange={handleSecondaryConcentrationChange}
+              value={secondaryConcentration}
+            />
+          </div>
+
+          <p>Special Concentration</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Special Concentration"
+              onChange={handleSpecialConcentrationChange}
+              value={specialConcentration}
+            />
+          </div>
+
+          <p>Minor</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Minor"
+              onChange={handleMinorChange}
+              value={minor}
+            />
+          </div>
+
+          <p>Minor Concentration</p>
+          <div>
+            <input
+              type="text"
+              placeholder="Minor Concentration"
+              onChange={handleMinorConcentrationChange}
+              value={minorConcentration}
+            />
+          </div>
+
           <button onClick={onSubmitClick} type="submit">
-            CreateUser
+            Save my profile
           </button>
         </form>
       </div>

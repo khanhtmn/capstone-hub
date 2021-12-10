@@ -17,6 +17,7 @@ import Login from './Components/Login';
 import TopNavBar from './Components/TopNavBar';
 import LeftNavBar from './Components/LeftNavBar';
 import Register from "./Components/Register";
+import CreateUser from "./Components/CreateUser";
 
 function App() {
 
@@ -37,8 +38,12 @@ function App() {
           </Route>
 
           <Route element={
+            <CreateUser/>
+          } path="/users">
+          </Route>
+
+          <Route element={
             <ProjectList/>
-            // <h1>Hehe</h1>
           } path="/">
           </Route>
         </Routes>
