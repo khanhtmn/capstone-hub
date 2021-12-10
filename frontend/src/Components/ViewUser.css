@@ -1,23 +1,11 @@
 .RowOuter {
   display: flex;
   flex-direction: row;
-  /* width: 100%; */
 }
 
 .ColumnOuter {
   display: flex;
   flex-direction: column;
-}
-
-button {
-  width: 200px;
-  height: 50px;
-}
-
-.buttonDecor {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .CardsCollection {
@@ -68,11 +56,6 @@ button {
   letter-spacing: 0.02em;
 
   color: #000000;
-}
-
-.PersonalInfo a{
-  text-decoration: none;
-  color: black;
 }
 
 .UserFirstname {

@@ -4,6 +4,7 @@ import './ProjectList.css';
 import CreateProject from './CreateProject';
 import LeftNavBar from './LeftNavBar';
 import TopNavBar from './TopNavBar';
+import { Link } from 'react-router-dom';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
@@ -36,9 +37,11 @@ const ProjectList = () => {
       <LeftNavBar/>
       <div className="ColumnOuter">
         <TopNavBar/>
-        <button onClick = {() => {setShowButton(!showButton)}} >
-          Submit your project here
-        </button>
+        <div className="buttonDecor">
+          <button onClick = {() => {setShowButton(!showButton)}} >
+            Submit your project here
+          </button>
+        </div>
         {showButton && <CreateProject/>}
         <div className="CardsCollection">
         {/* Display the project details if project is not None */}
@@ -50,7 +53,9 @@ const ProjectList = () => {
               <div className="AvaTextCard">
                   <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
                     <div className="PersonalInfo">
-                      <p className="UserFirstname">{project.firstname} {project.lastname}</p>
+                      <Link to={`/users/${project.id}`} >
+                        <p className="UserFirstname">{project.firstname} {project.lastname}</p>
+                      </Link>
                       <p className="Text">Major: {project.primary_major} - {project.primary_concentration} | Minor: {project.minor}</p>
                       <p className="Text">Project Features:</p>
                     </div>

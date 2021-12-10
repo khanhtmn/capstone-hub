@@ -1,12 +1,14 @@
 .AppContainer {
   display: flex;
   flex-direction: row;
+  width: 100vw;
+  height: 100vh;
 }
 
 .LeftNavBar {
   background-color: #C4C4C4;
   width: 228px;
-  height: 100vh;
+  height: 100%;
 }
 
 .MainBox {
@@ -25,7 +27,7 @@
   flex-direction: row;
   background-color: #C4C4C4;
   height: 69px;
-  width: 100vw;
+  width: 100%;
 }
 
 .HeaderLogo {

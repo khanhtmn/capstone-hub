@@ -18,6 +18,7 @@ import TopNavBar from './Components/TopNavBar';
 import LeftNavBar from './Components/LeftNavBar';
 import Register from "./Components/Register";
 import CreateUser from "./Components/CreateUser";
+import ViewUser from "./Components/ViewUser";
 
 function App() {
 
@@ -35,6 +36,11 @@ function App() {
           <Route element={
             <Login/>
           } path="/login">
+          </Route>
+
+          <Route element={
+            <ViewUser/>
+          } path="/users/:id">
           </Route>
 
           <Route element={
