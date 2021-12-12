@@ -2,7 +2,7 @@
 
 ## Database schema
 
-![Database schema](https://drive.google.com/file/d/1MuhyV2R3Zj4hyrxkc_UxcEfn6bFNvzh7/view?usp=sharing)
+![Database schema](https://i.ibb.co/gtqY4Wz/Capstone-Hub-Database-Schema.png)
 
 ## Backend - Flask
 ### Installation
