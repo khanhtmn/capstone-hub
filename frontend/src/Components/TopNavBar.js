@@ -4,20 +4,18 @@ import './TopNavBar.css';
 
 const TopNavBar = () => {
   return (
-    <div className="MainBox">
     <div className="TopNavBar">
       <div className="SearchBar">
         <img src={MagnifyingGlass} className="MagnifyingGlass"/>
       </div>
-      <div className="Toggle" style={{width:107}}>
+      <div className="Toggle">
         <p>Major</p>
         <img src={UpsideDownTriangle} className="UpsideDownTriangle"/>          
       </div>
-      <div className="Toggle" style={{width:178}}>
+      <div className="Toggle">
         <p>Project Feature</p>
         <img src={UpsideDownTriangle} className="UpsideDownTriangle"/>          
       </div>
-    </div>
     </div>
   )
 }

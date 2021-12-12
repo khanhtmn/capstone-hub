@@ -75,7 +75,7 @@ const CreateProject = () => {
   }
 
   return (
-    <div className="BigBox">
+    <div className="CreateProject">
       <div className="SmallBox">
         <p>Let's submit your project </p>
         <form action="#">

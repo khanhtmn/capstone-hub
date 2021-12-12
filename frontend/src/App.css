@@ -1,78 +1,7 @@
 .AppContainer {
-  display: flex;
-  flex-direction: row;
+  box-sizing: border-box;
   width: 100vw;
   height: 100vh;
-}
-
-.LeftNavBar {
-  background-color: #C4C4C4;
-  width: 228px;
-  height: 100%;
-}
-
-.MainBox {
-  display: flex;
-  flex-direction: column;
-}
-
-.CardsCollection {
-  display: flex;
-  flex-wrap: wrap;
-  padding-left: 40px;
-}
-
-.TopNavBar {
-  display: flex;
-  flex-direction: row;
-  background-color: #C4C4C4;
-  height: 69px;
-  width: 100%;
-}
-
-.HeaderLogo {
-  width: 204px;
-  height: 173px;
-  padding: 12px;
-  background-color: #ABA9A9;
-}
-
-.SearchBar {
-  display: flex;
-  flex-direction: row;
-  padding-left: 12px;
-  align-items: center;
-  margin: 12px 40px;
-  width: 440px;
-  height: 45px;
-  background: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.MagnifyingGlass {
-  height: 16px;
-  width: 16px;
-}
-
-.Toggle {
-  display: flex;
-  flex-direction: row;
-  padding-left: 12px;
-  flex-direction: row;
-  align-items: center;
-  margin: 12px 40px;
-  width: 107px;
-  height: 45px;
-  background: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.UpsideDownTriangle {
-  height: 7.5px;
-  width: 10px;
-  padding-left: 10px;
 }
 
 .AvaText {
@@ -89,7 +18,8 @@
   width: 90px;
 }
 
-.PersonalInfo {  
+/* 
+.PersonalInfo {
   display: flex;
   margin: auto 2px auto 2px;
   flex-direction: column;
@@ -100,9 +30,7 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 20%;
-
   letter-spacing: 0.02em;
-
   color: #000000;
 }
 
@@ -120,4 +48,4 @@
   font-size: 14px;
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.5);
-}
+} */

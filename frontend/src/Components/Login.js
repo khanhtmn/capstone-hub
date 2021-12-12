@@ -15,7 +15,7 @@ const Login = (props) => {
       'password': password
     }
     console.log(opts)
-    fetch('/login', {
+    fetch('http://localhost:5000/login', {
       method: 'post',
       headers: new Headers({
         "Authorization": "Basic " + `${base64.encode(`${username}:${password}`)}`
@@ -43,7 +43,7 @@ const Login = (props) => {
   }
 
   return (
-    <div className="BigBox">
+    <div className="Login">
       <div className="SmallBox">
         <p>Login to Your Account</p>
         <form action="#">

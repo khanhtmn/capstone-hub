@@ -1,36 +1,38 @@
-.BigBox {
+.CreateProject {
+  box-sizing: border-box;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 40vmax;
-  width: 100vmax;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0 8px 8px;
 }
 
-.SmallBox {
+.CreateProject .SmallBox {
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #c4c4c4;
   display: flex;
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  height: 550px;
-  width: 350px;
-  border-radius: 8px;
-  margin: 10px;
-  padding: 10px;
-  background-color: #C4C4C4;
-  overflow-y:auto;
+
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.CreateProject .SmallBox::-webkit-scrollbar {
+  display: none;
 }
 
-.p {
-  width: 292px;
-  height: 38px;
-  
+.CreateProject p {
   font-family: Montserrat;
   font-style: bold;
   font-weight: 500;
-  font-size: 25px;
-  line-height: 150%;
-  
+  font-size: 20px;
+  line-height: 28px;
   letter-spacing: 0.02em;
-  
+
   color: #000000;
 }

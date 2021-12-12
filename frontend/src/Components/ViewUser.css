@@ -1,65 +1,64 @@
-.RowOuter {
+.ViewUser {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 
-.ColumnOuter {
+.ViewUser .ColumnOuter {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
-.UserCardsCollection {
+.ViewUser .CardsCollection {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 220px;
+  padding-left: 10px;
 }
 
-.UserCard {
-  height: 100%;
-  width: 700px;
+.ViewUser .Card {
+  height: 241px;
+  width: 500px;
   left: 0px;
   top: 0px;
   border-radius: 8px;
   margin: 10px;
   padding: 10px;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   overflow: hidden;
 }
 
-.UserAvaTextCard {
+.ViewUser .AvaTextCard {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 500px;
-  height: auto;
+  height: 138px;
 }
 
-.Avatar {
+.ViewUser .Avatar {
   margin: 30px 8px;
   height: 90px;
   width: 90px;
 }
 
-.UserPersonalInfo {  
+.ViewUser .PersonalInfo {
   display: flex;
-  margin: auto 10px auto 10px;
-  padding: 20px 20px 20px 5px;
+  margin: auto 2px auto 2px;
   flex-direction: column;
   justify-content: center;
-  width: 470px;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
-  line-height: 20%;
-
   letter-spacing: 0.02em;
 
   color: #000000;
 }
 
-.UserFirstname {
+.ViewUser .UserFirstname {
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
@@ -67,26 +66,10 @@
   letter-spacing: 0.02em;
 }
 
-.UserHeading {
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 21px;
-  letter-spacing: 0.02em;
-  text-align: left;
-  columns: black;
-}
-
-.UserText {
-  width: 500px;
-  height: auto;
+.ViewUser .Text {
   font-family: Roboto;
   font-style: normal;
-  font-weight: 500;
   font-size: 14px;
-  line-height: 130%;  
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.5);
 }
-

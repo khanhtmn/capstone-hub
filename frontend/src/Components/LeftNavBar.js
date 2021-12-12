@@ -5,7 +5,9 @@ import './LeftNavBar.css';
 const LeftNavBar = () => {
   return (
     <div className="LeftNavBar">
-    <img src={MinervaLogo} className="HeaderLogo" alt="Header logo" />
+      <div className="HeaderLogo">
+        <img src={MinervaLogo} alt="Header logo" />
+      </div>
     <div className="AvaText">
       <img src={SampleAvatar} className="Avatar" alt="Avatar"/>
         <div className="PersonalInfo">
