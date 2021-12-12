@@ -31,7 +31,7 @@ const CreateUser = () => {
       'minor_concentration': minorConcentration,
     }
     console.log(opts)
-    fetch('/users', {
+    fetch('http://localhost:5000/users', {
       method: 'POST',
       headers: {
         'Content-Type':'application/json',
@@ -93,7 +93,7 @@ const CreateUser = () => {
   }
 
   return (
-    <div className="BigBox">
+    <div className="CreateUser">
       <div className="SmallBox">
         <p>Let's create your profile</p>
         <form action="#">

@@ -34,11 +34,11 @@ const ViewUser = () => {
   },[])
   console.log(users)
   return (
-    <div className="RowOuter">
+    <div className="ViewUser">
       <LeftNavBar/>
       <div className="ColumnOuter">
         <TopNavBar/>
-        <div className="UserCardsCollection">
+        <div className="CardsCollection">
           {/* Display the project details if project is not None */}
           {users?.map(user =>{
               return (

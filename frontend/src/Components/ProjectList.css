@@ -1,81 +1,84 @@
-.RowOuter {
+.ProjectList {
+  box-sizing: border-box;
   display: flex;
-  flex-direction: row;
-  /* width: 100%; */
+  width: 100%;
+  height: 100%;
 }
 
-.ColumnOuter {
+.ProjectList .ColumnOuter {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
-button {
-  width: 200px;
-  height: 50px;
-}
-
-.buttonDecor {
+.ProjectList .submitProject {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
-.CardsCollection {
+.ProjectList .submitProject button {
+  width: 200px;
+  height: 50px;
+  margin: 20px 0;
+}
+
+.ProjectList .ColumnOuter .CardsCollection {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  padding-left: 10px;
+  overflow: auto;
 }
 
-.Card {
-  height: 241px;
-  width: 500px;
-  left: 0px;
-  top: 0px;
+.ProjectList .ColumnOuter .CardsCollection::-webkit-scrollbar {
+  display: none;
+}
+
+.ProjectList .Card {
+  box-sizing: border-box;
+  height: 200px;
+  width: 400px;
   border-radius: 8px;
-  margin: 10px;
+  margin: 8px;
   padding: 10px;
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   overflow: hidden;
 }
 
-.AvaTextCard {
+.ProjectList .Card .AvaTextCard {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 500px;
-  height: 138px;
+  align-items: flex-start;
+  width: 100%;
+  height: 80px;
+  flex-shrink: 0;
 }
 
-.Avatar {
-  margin: 30px 8px;
-  height: 90px;
-  width: 90px;
+.ProjectList .Card .AvaTextCard .Avatar {
+  margin: 0;
+  margin-right: 12px;
+  height: 60px;
+  width: 60px;
 }
 
-.PersonalInfo {  
+.ProjectList .Card .AvaTextCard .PersonalInfo {
   display: flex;
-  margin: auto 2px auto 2px;
+  margin: 0;
   flex-direction: column;
-  justify-content: center;
-  width: 470px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 20%;
-
-  letter-spacing: 0.02em;
-
   color: #000000;
 }
 
-.PersonalInfo a{
+.ProjectList .Card .AvaTextCard .PersonalInfo a {
   text-decoration: none;
   color: black;
 }
 
-.UserFirstname {
+.ProjectList .Card .AvaTextCard .PersonalInfo .UserFirstname {
+  margin: 0;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
@@ -83,10 +86,15 @@ button {
   letter-spacing: 0.02em;
 }
 
-.Text {
+.ProjectList .Card .AvaTextCard .PersonalInfo .Text {
+  margin: 0;
   font-family: Roboto;
   font-style: normal;
   font-size: 14px;
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.5);
+}
+
+.ProjectList .Card > .Text {
+  margin: 0;
 }

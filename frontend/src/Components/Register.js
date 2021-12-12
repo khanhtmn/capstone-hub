@@ -15,7 +15,7 @@ const Register = (props) => {
       'password': password
     }
     console.log(opts)
-    fetch('/register', {
+    fetch('http://localhost:5000/register', {
       method: 'POST',
       headers: {
         'Content-Type':'application/json',
@@ -44,7 +44,7 @@ const Register = (props) => {
   }
 
   return (
-    <div className="BigBox">
+    <div className="Register">
       <div className="SmallBox">
         <p>Register Your New Account</p>
         <form action="#">
