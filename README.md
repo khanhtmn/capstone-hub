@@ -1,4 +1,9 @@
 # Requirements, Usage and Installation
+
+## Database schema
+
+![Database schema](https://drive.google.com/file/d/1MuhyV2R3Zj4hyrxkc_UxcEfn6bFNvzh7/view?usp=sharing)
+
 ## Backend - Flask
 ### Installation
                     
