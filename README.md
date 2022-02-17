@@ -63,19 +63,7 @@ Applies for windows/macOS/Linux
 
 ```pip install -r requirements.txt```
 
-#### 4 .Migrate/Create a database - Optional during initial set up
-
-Applies for windows/macOS/Linux
-
-```python manage.py```
-
-#### 5 .Insert the fake data - Optional for development purpose
-
-Applies for windows/macOS/Linux
-
-```python insert.py```
-
-#### 6 .Add config and environment file
+#### 4 .Add config and environment file
 
 Create the following files in the `backend` directory: `.env`, `.flaskenv`, `config.py`
 
@@ -101,6 +89,18 @@ SQLALCHEMY_DATABASE_URI = "sqlite:///database.db"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SECRET_KEY = "Th1s1ss3cr3t"
 ```
+
+#### 5 .Migrate/Create a database - Optional during initial set up
+
+Applies for windows/macOS/Linux
+
+```python manage.py```
+
+#### 6 .Insert the fake data - Optional for development purpose
+
+Applies for windows/macOS/Linux
+
+```python insert.py```
 
 #### 7. Run the application 
 
