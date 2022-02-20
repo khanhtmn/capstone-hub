@@ -85,6 +85,11 @@ projects_to_add = create_list_of_data(\
 
 def insert_data():
     """To insert data"""
+    # import sqlite3
+
+    # db = sqlite3.connect("database.db")
+    # cur = db.cursor()
+
 
     # Create application context to add data to the database
     from app import create_app
@@ -93,9 +98,13 @@ def insert_data():
 
     # List of keys with (list_of_data, model) to iterate
     keys = [(logins_to_add, Login), (users_to_add, User), (projects_to_add, Project)]
-
+    i = 0
     # Insert data
     for dict_to_add, table in keys:
+        i += 1
+        print(table, "tablename")
+        if i >= 2:
+            return
         for dict_row in dict_to_add:
             try:
                 stmt = table(**dict_row)

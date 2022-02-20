@@ -204,7 +204,7 @@ class Project(db.Model):
     title = db.Column(db.String())
     abstract = db.Column(db.String())
     keywords = db.Column(db.String())
-    features = db.Column(db.String())
+    feature = db.Column(db.String())
     # feature = db.Column(db.Enum(FeatureEnum))
     # feature = db.Column(db.ArrayOfEnum(db.Enum(FeatureEnum)))
     los = db.Column(db.String())
@@ -222,7 +222,7 @@ class Project(db.Model):
 class ProjectSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ("id","user_id", "title", "abstract", "keywords", "features",
+        fields = ("id","user_id", "title", "abstract", "keywords", "feature",
                 "los", "custom_los", "hsr_review", "last_updated")
 
 project_schema = ProjectSchema()
