@@ -13,7 +13,6 @@ import Checkbox from "@mui/material/Checkbox";
 
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import { Button } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -74,22 +73,27 @@ const TopNavBar = (props) => {
   console.log(userMajorFilters, "from TopNavBar");
   return (
     <div className="TopNavBar">
-      <form onSubmit={handleSubmit}>
-        <TextField
-          id="input-with-icon-textfield"
-          value={searchValue}
-          onChange={(event) => setSearchValue(event.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search />
-              </InputAdornment>
-            ),
-          }}
-          variant="standard"
-        />
-      </form>
-      <FormControl sx={{ m: 1, width: 120 }}>
+      <div className="SearchBox">
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            label="Search for project, name, etc."
+            id="input-with-icon-textfield"
+            value={searchValue}
+            onChange={(event) => setSearchValue(event.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+            color="success"
+          />
+        </form>
+      </div>
+      <FormControl sx={{ m: 1, width: 250 }}>
         <InputLabel id="demo-multiple-checkbox-label">Major</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
