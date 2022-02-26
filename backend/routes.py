@@ -104,7 +104,7 @@ def login_user():
 
 # Placeholder route for main page
 @app.route("/", methods=["GET"])
-@token_required
+# @token_required
 def hello(current_user):
     return "Hello"
 
@@ -113,8 +113,9 @@ def hello(current_user):
 
 # API to view all projects with student information
 @app.route("/projects", methods=["GET"])
-@token_required
-def projects(current_user):
+def projects():
+# @token_required
+# def projects(current_user):
     """
     Get all projects
     :param current_user: The user who is making the get request
@@ -154,8 +155,9 @@ def projects(current_user):
 
 # API to view project by id
 @app.route("/projects/<int:project_id>", methods=["GET"])
-@token_required
-def get_project_by_id(current_user, project_id):
+# @token_required
+def get_project_by_id(project_id):
+# def get_project_by_id(current_user, project_id):
     """
     Get project by id
     :param current_user: The user who is making the get request
@@ -202,8 +204,9 @@ def get_project_by_id(current_user, project_id):
 
 # API to edit project by id
 @app.route("/projects/<int:project_id>", methods=["PUT"])
-@token_required
-def update_project_by_id(current_user, project_id):
+def update_project_by_id(project_id):
+# @token_required
+# def update_project_by_id(current_user, project_id):
     if request.method == 'PUT':
         """
         Update project by id
@@ -258,8 +261,9 @@ def update_project_by_id(current_user, project_id):
 
 # API to create project info
 @app.route("/projects", methods=["POST"])
-@token_required
-def create_new_project(current_user):
+def create_new_project():
+# @token_required
+# def create_new_project(current_user):
     if request.method == 'POST':
         """
         Create new project info
@@ -268,53 +272,55 @@ def create_new_project(current_user):
         """
 
         try:
-            user = User.query\
-                .filter(User.id==current_user.id)\
-                .first()
+            # user = User.query\
+            #     .filter(User.id==current_user.id)\
+            #     .first()
 
-            if user:
+            # if user:
 
-                request_data = request.get_json()
+            request_data = request.get_json()
 
-                title = None
-                abstract = None
-                keywords = None
-                feature = None
-                los = None
-                custom_los = None
-                hsr_review = None
+            title = None
+            abstract = None
+            keywords = None
+            feature = None
+            los = None
+            custom_los = None
+            hsr_review = None
 
-                if request_data:
-                    if 'title' in request_data:
-                        title = request_data['title']
+            if request_data:
+                if 'title' in request_data:
+                    title = request_data['title']
 
-                    if 'abstract' in request_data:
-                        abstract = request_data['abstract']
+                if 'abstract' in request_data:
+                    abstract = request_data['abstract']
 
-                    if 'keywords' in request_data:
-                        keywords = request_data['keywords']
+                if 'keywords' in request_data:
+                    keywords = request_data['keywords']
 
-                    if 'feature' in request_data:
-                        feature = request_data['feature']
+                if 'feature' in request_data:
+                    feature = request_data['feature']
 
-                    if 'los' in request_data:
-                        los = request_data['los']
+                if 'los' in request_data:
+                    los = request_data['los']
 
-                    if 'custom_los' in request_data:
-                        custom_los = request_data['custom_los']
+                if 'custom_los' in request_data:
+                    custom_los = request_data['custom_los']
 
-                    if 'hsr_review' in request_data:
-                        hsr_review = request_data['hsr_review']
+                if 'hsr_review' in request_data:
+                    hsr_review = request_data['hsr_review']
+                new_project = Project(title=title, abstract=abstract,\
+                                            keywords=keywords, feature=feature, los=los, custom_los=custom_los,\
+                                            hsr_review=hsr_review)
+                # new_project = Project(user_id=current_user.id, title=title, abstract=abstract,\
+                #             keywords=keywords, feature=feature, los=los, custom_los=custom_los,\
+                #             hsr_review=hsr_review)
+                db.session.add(new_project)
+                db.session.commit()
 
-                    new_project = Project(user_id=current_user.id, title=title, abstract=abstract,\
-                                keywords=keywords, feature=feature, los=los, custom_los=custom_los,\
-                                hsr_review=hsr_review)
-                    db.session.add(new_project)
-                    db.session.commit()
-
-                    data = {'message': 'Project information saved successfully'}
-                    response = make_response(jsonify(data=data, status=201))
-                    return response
+                data = {'message': 'Project information saved successfully'}
+                response = make_response(jsonify(data=data, status=201))
+                return response
 
             else:
                 abort(404, description="Cannot find user profile. Please create your profile info and come back here")
@@ -327,8 +333,9 @@ def create_new_project(current_user):
 
 # API to view user by id
 @app.route("/users/<int:user_id>", methods=["GET"])
-@token_required
-def get_user_by_id(current_user, user_id):
+def get_user_by_id(user_id):
+# @token_required
+# def get_user_by_id(current_user, user_id):
     """
     Get user by id
     :param current_user: The user who is making the get request
@@ -372,8 +379,9 @@ def get_user_by_id(current_user, user_id):
 
 # API to edit user by id
 @app.route("/users/<int:user_id>", methods=["PUT"])
-@token_required
-def update_user_by_id(current_user, user_id):
+def update_user_by_id(user_id):
+# @token_required
+# def update_user_by_id(current_user, user_id):
     if request.method == 'PUT':
         """
         Get user by id
@@ -387,49 +395,49 @@ def update_user_by_id(current_user, user_id):
                 .filter(User.id==user_id)\
                 .first()
 
-            if user_info.id == current_user.id:
+            # if user_info.id == current_user.id:
 
-                request_data = request.get_json()
+            request_data = request.get_json()
 
-                if request_data:
-                    if 'firstname' in request_data:
-                        user_info.firstname = request_data['firstname']
+            if request_data:
+                if 'firstname' in request_data:
+                    user_info.firstname = request_data['firstname']
 
-                    if 'lastname' in request_data:
-                        user_info.lastname = request_data['lastname']
+                if 'lastname' in request_data:
+                    user_info.lastname = request_data['lastname']
 
-                    if 'role' in request_data:
-                        user_info.role = request_data['role']
+                if 'role' in request_data:
+                    user_info.role = request_data['role']
 
-                    if 'primary_major' in request_data:
-                        user_info.primary_major = request_data['primary_major']
+                if 'primary_major' in request_data:
+                    user_info.primary_major = request_data['primary_major']
 
-                    if 'secondary_major' in request_data:
-                        user_info.secondary_major = request_data['secondary_major']
+                if 'secondary_major' in request_data:
+                    user_info.secondary_major = request_data['secondary_major']
 
-                    if 'primary_concentration' in request_data:
-                        user_info.primary_concentration = request_data['primary_concentration']
+                if 'primary_concentration' in request_data:
+                    user_info.primary_concentration = request_data['primary_concentration']
 
-                    if 'secondary_concentration' in request_data:
-                        user_info.secondary_concentration = request_data['secondary_concentration']
+                if 'secondary_concentration' in request_data:
+                    user_info.secondary_concentration = request_data['secondary_concentration']
 
-                    if 'special_concentration' in request_data:
-                        user_info.special_concentration = request_data['special_concentration']
+                if 'special_concentration' in request_data:
+                    user_info.special_concentration = request_data['special_concentration']
 
-                    if 'minor' in request_data:
-                        user_info.minor = request_data['minor']
+                if 'minor' in request_data:
+                    user_info.minor = request_data['minor']
 
-                    if 'minor_concentration' in request_data:
-                        user_info.minor_concentration = request_data['minor_concentration']
+                if 'minor_concentration' in request_data:
+                    user_info.minor_concentration = request_data['minor_concentration']
 
-                    user_info.last_updated = datetime.utcnow()
-                    db.session.commit()
+                user_info.last_updated = datetime.utcnow()
+                db.session.commit()
 
-                response = make_response(jsonify(data="Success", status=200))
-                return response
+            response = make_response(jsonify(data="Success", status=200))
+            return response
 
-            else:
-                abort(403, description="Doesn't have the privilege to update user info")
+            # else:
+            #     abort(403, description="Doesn't have the privilege to update user info")
 
         except Exception as e:
             return(str(e))
@@ -437,8 +445,9 @@ def update_user_by_id(current_user, user_id):
 
 # API to create user info
 @app.route("/users", methods=["POST"])
-@token_required
-def create_new_user(current_user):
+def create_new_user():
+# @token_required
+# def create_new_user(current_user):
     if request.method == 'POST':
         """
         Create new user profile
