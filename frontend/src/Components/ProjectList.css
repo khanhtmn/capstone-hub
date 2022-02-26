@@ -32,6 +32,7 @@
   display: flex;
   flex-wrap: wrap;
   overflow: auto;
+  justify-content: center;
 }
 
 .ProjectList .ColumnOuter .CardsCollection::-webkit-scrollbar {
@@ -41,7 +42,7 @@
 .ProjectList .Card {
   box-sizing: border-box;
   height: 200px;
-  width: 400px;
+  width: 500px;
   border-radius: 8px;
   margin: 8px;
   padding: 10px;
