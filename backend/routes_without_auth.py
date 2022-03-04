@@ -126,7 +126,7 @@ def projects():
             data = []
             all_projects = Project.query\
                 .join(User, Project.user_id==User.id)\
-                .add_columns(User.id, User.firstname, User.lastname,User.primary_major,\
+                .add_columns(User.id, User.name,User.primary_major,\
                     User.secondary_major, User.minor, User.primary_concentration,\
                         Project.title, Project.abstract, Project.feature)\
                 .filter(Project.user_id==User.id)\
@@ -135,8 +135,7 @@ def projects():
                 data.append(
                     {
                         "id": project.id,
-                        "firstname": project.firstname,
-                        "lastname": project.lastname,
+                        "name": project.name,
                         "primary_major": project.primary_major,
                         "secondary_major": project.secondary_major,
                         "minor": project.minor,
@@ -170,7 +169,7 @@ def get_project_by_id(project_id):
             project_info = Project.query\
                 .filter(Project.id==project_id)\
                 .join(User, Project.user_id==User.id)\
-                .add_columns(Project.id, Project.user_id, User.firstname, User.lastname,\
+                .add_columns(Project.id, Project.user_id, User.name,\
                     User.primary_major,User.secondary_major, User.minor,\
                     User.primary_concentration,Project.title, Project.abstract,\
                     Project.keywords, Project.feature, Project.los,Project.custom_los,\
@@ -179,8 +178,7 @@ def get_project_by_id(project_id):
             data = {
                     "id": project_info.id,
                     "user_id": project_info.user_id,
-                    "firstname": project_info.firstname,
-                    "lastname": project_info.lastname,
+                    "name": project_info.name,
                     "primary_major": project_info.primary_major,
                     "secondary_major": project_info.secondary_major,
                     "minor": project_info.minor,
@@ -352,14 +350,13 @@ def get_user_by_id(user_id):
             user_info = User.query\
                 .filter(User.id==user_id)\
                 .join(Project, Project.user_id==User.id)\
-                .add_columns(User.firstname, User.lastname,User.primary_major,\
+                .add_columns(User.name, User.primary_major,\
                     User.secondary_major, User.minor,User.primary_concentration,\
                     Project.title, Project.abstract,Project.keywords, Project.feature,\
                     Project.los,Project.custom_los,Project.hsr_review, Project.last_updated)\
                 .first()
             data = [{
-                "firstname": user_info.firstname,
-                "lastname": user_info.lastname,
+                "name": user_info.name,
                 "primary_major": user_info.primary_major,
                 "secondary_major": user_info.secondary_major,
                 "minor": user_info.minor,
@@ -404,11 +401,8 @@ def update_user_by_id(user_id):
             request_data = request.get_json()
 
             if request_data:
-                if 'firstname' in request_data:
-                    user_info.firstname = request_data['firstname']
-
-                if 'lastname' in request_data:
-                    user_info.lastname = request_data['lastname']
+                if 'name' in request_data:
+                    user_info.name = request_data['name']
 
                 if 'role' in request_data:
                     user_info.role = request_data['role']
@@ -468,8 +462,7 @@ def update_user_by_id(user_id):
 
 #                 request_data = request.get_json()
 
-#                 firstname = None
-#                 lastname = None
+#                 name = None
 #                 role = None
 #                 primary_major = None
 #                 secondary_major = None
@@ -480,11 +473,8 @@ def update_user_by_id(user_id):
 #                 minor_concentration = None
 
 #                 if request_data:
-#                     if 'firstname' in request_data:
-#                         firstname = request_data['firstname']
-
-#                     if 'lastname' in request_data:
-#                         lastname = request_data['lastname']
+#                     if 'name' in request_data:
+#                         name = request_data['name']
 
 #                     if 'role' in request_data:
 #                         role = request_data['role']
@@ -510,7 +500,7 @@ def update_user_by_id(user_id):
 #                     if 'minor_concentration' in request_data:
 #                         minor_concentration = request_data['minor_concentration']
 
-#                     new_user = User(login_id=current_user.id, firstname=firstname, lastname=lastname,\
+#                     new_user = User(login_id=current_user.id, name=name,\
 #                                 role=role, primary_major=primary_major, secondary_major=secondary_major,\
 #                                 primary_concentration=primary_concentration,\
 #                                 secondary_concentration=secondary_concentration,\

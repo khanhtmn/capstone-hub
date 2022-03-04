@@ -17,6 +17,7 @@ const ProjectList = () => {
   // the response from the backend
   // similar to setTimeOut
   useEffect(() => {
+    console.log(projects, "Here's");
     setRenderedProjects([...projects]);
     const majorSet = new Set();
     const featureSet = new Set();
