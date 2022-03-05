@@ -12,6 +12,7 @@ from models import Login, User, Project
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+import sqlalchemy
 
 # Create an application instance
 app = create_app()
@@ -104,8 +105,9 @@ def login_user():
 
 # Placeholder route for main page
 @app.route("/", methods=["GET"])
+def hello():
 # @token_required
-def hello(current_user):
+# def hello(current_user):
     return "Hello"
 
 
@@ -518,6 +520,44 @@ def update_user_by_id(user_id):
 
 #         except Exception as e:
 #             return(str(e))
+
+def serialize_item(item, category):
+    if category == 'user':
+        return {
+            'id': item.id,
+            'name': item.name,
+            'class_year': item.class_year,
+            'primary_major': item.primary_major,
+            'secondary_major': item.secondary_major,
+            'primary_concentration': item.primary_concentration,
+            'secondary_concentration': item.secondary_concentration,
+            'special_concentration': item.special_concentration,
+            'minor': item.minor,
+            'minor_concentration': item.minor_concentration,
+        }
+    elif category == 'project':
+        return {
+            'title': item.title,
+            'abstract': item.abstract,
+        }
+
+def serialize_many(users, projects):
+    list_users = [serialize_item(user, 'user') for user in users]
+    list_projects = [serialize_item(project, 'project') for project in projects]
+    return list_users + list_projects
+
+@app.route("/search", methods=["GET"])
+def search_projects():
+    search_string = request.args.get('q')
+
+    if search_string:
+        tq = sqlalchemy.func.plainto_tsquery('english', search_string)
+        q_user = User.query.filter(User.__ts_vector__.op('@@')(tq))
+        q_project = Project.query.filter(Project.__ts_vector__.op('@@')(tq))
+
+    return jsonify(serialize_many(
+        q_user.all(), q_project.all()
+    ))
 
 
 if __name__ == "__main__":

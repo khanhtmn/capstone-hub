@@ -102,9 +102,6 @@ projects_to_add = create_list_of_data(\
     model_cols=projects_cols,\
     )
 
-# print(projects_to_add[:3])
-# print(len(projects_to_add))
-
 
 def insert_data():
     """To insert data"""

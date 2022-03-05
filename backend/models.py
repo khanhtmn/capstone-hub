@@ -2,11 +2,28 @@
 Define models for database schema
 '''
 
+from sqlalchemy.sql import func
+    
+from sqlalchemy import func, Index, text
+from sqlalchemy.sql.operators import op
+from sqlalchemy.orm import relationship
 
 from datetime import datetime
-from sqlalchemy.orm import relationship
+
 from app import db
 
+CONFIG = 'english'
+
+def to_tsvector_ix(*columns):
+    s = " || ' ' || ".join(columns)
+    return func.to_tsvector(CONFIG, text(s))
+
+def create_tsvector(*args):
+    field, weight = args[0]
+    exp = func.setweight(func.to_tsvector(CONFIG, field), weight)
+    for field, weight in args[1:]:
+        exp = op(exp, '||', func.setweight(func.to_tsvector(CONFIG, field), weight))
+    return exp
 
 class Login(db.Model):
     """
@@ -46,7 +63,13 @@ class User(db.Model):
     
     logins = relationship(Login)
 
-    # Index major and concentration or not?
+    __ts_vector__ = to_tsvector_ix(
+        'name', 'primary_major', 'secondary_major', 'primary_concentration', 'secondary_concentration', 'special_concentration', 'minor', 'minor_concentration'
+    )
+
+    __table_args__ = (
+        Index('user_index', __ts_vector__, postgresql_using='gin'),
+    )
 
     def __repr__(self):
         return '<User info {}{}>'.format(self.firstname, self.lastname)
@@ -76,6 +99,14 @@ class Project(db.Model):
     last_updated = db.Column(db.DateTime, index=True, default=datetime.utcnow().strftime('%m/%d/%Y %H:%M:%S'))
 
     users = relationship(User)
+
+    __ts_vector__ = to_tsvector_ix(
+        'title', 'abstract', 'keywords', 'feature', 'hsr_review', 'skills', 'los', 'custom_los', 'advisor', 'skills_offering', 'skills_requesting', 'location', 'last_updated'
+    )
+
+    __table_args__ = (
+        Index('project_index', __ts_vector__, postgresql_using='gin'),
+    )
 
     def __repr__(self):
         return '<Capstone info {}>'.format(self.title)
