@@ -2,132 +2,28 @@
 Define models for database schema
 '''
 
-
-import enum
-from datetime import datetime
+from sqlalchemy.sql import func
+    
+from sqlalchemy import func, Index, text
+from sqlalchemy.sql.operators import op
 from sqlalchemy.orm import relationship
-from app import db, ma
 
+from datetime import datetime
 
-class ClassEnum(str, enum.Enum):
-    """
-    Class defining enums for class year
-    used in tables
-    """
+from app import db
 
-    M19 = "Class of 2019"
-    M20 = "Class of 2020"
-    M21 = "Class of 2021"
-    M22 = "Class of 2022"
-    M23 = "Class of 2023"
-    M24 = "Class of 2024"
-    M25 = "Class of 2025"
-    M26 = "Class of 2026"
+CONFIG = 'english'
 
+def to_tsvector_ix(*columns):
+    s = " || ' ' || ".join(columns)
+    return func.to_tsvector(CONFIG, text(s))
 
-class CollegeEnum(str, enum.Enum):
-    """
-    Class defining enums for majors and minors
-    used in tables
-    """
-
-    CS = "Computer Science"
-    BS = "Business"
-    NS = "Natural Science"
-    AH = "Arts and Humanities"
-    SS = "Social Science"
-
-
-class ConcentrationEnum(str, enum.Enum):
-    """
-    Class defining enums for concentrations
-    used in tables
-    """
-
-    APS = "Applied Problem Solving"
-    AL = "Arts and Literature"
-    BM = "Brand Management"
-    CO = "Cells and Organisms"
-    CBB = "Cognition, Brain, and Behavior"
-    CTA = "Computational Theory and Analysis"
-    CSAI = "Computer Science and Artificial Intelligence"
-    CKD = "Contemporary Knowledge Discovery"
-    DSS = "Data Science and Statistics"
-    DS = "Designing Societies"
-    ES = "Earth's Systems"
-    ECS = "Economics and Society"
-    EASS = "Empirical Approaches to the Social Sciences"
-    EM = "Enterprise Management"
-    HFC = "Historical Forces"
-    HAN = "Humanities Analyses"
-    HAP = "Humanities Applications"
-    HFD = "Humanities Foundations"
-    MOC = "Managing Operational Complexity"
-    MATH = "Mathematics"
-    MA = "Molecules and Atoms"
-    NBV = "New Business Ventures"
-    PEL = "Philosophy, Ethics, and the Law"
-    PGS = "Politics, Government, and Society"
-    PSCS = "Problem Solving in Complex Systems"
-    RANS = "Research Analyses in Natural Science"
-    SG = "Scalable Growth"
-    SF = "Strategic Finance"
-    TFNS = "Theoretical Foundations of Natural Science"
-    TASS = "Theory and Analysis in the Social Sciences"
-    CSC = "Custom / Special concentration"
-
-
-class RoleEnum(str, enum.Enum):
-    """
-    Class defining enums for professor and student role
-    used in tables
-    """
-
-    advisor = "Advisor"
-    student = "Student"
-
-    # Consider having admin role
-
-
-class FeatureEnum(str, enum.Enum):
-    """
-    Class defining enums for project features
-    used in tables
-    """
-
-    creative = "Creative (e.g., writing, art)"
-    primary_research = "Primary research (e.g., with a research group)"
-    secondary_research = "Secondary research (e.g., literature review with analysis/synthesis and proposal for future work)"
-    replication = "Replication"
-    interview_survey = "Interview/survey"
-    data_analysis = "Data analysis"
-    journalism = "Journalism"
-    philosophical = "Philosophical analysis"
-    policy = "Policy analysis/proposal"
-    education = "Educational curriculum/materials"
-    business = "Business plan"
-    podcast = "Podcast"
-    app = "App"
-    other = "Other"
-
-
-class HSREnum(str, enum.Enum):
-    """
-    Class defining enums for HSR review status
-    used in tables
-    """
-
-    not_yet = "Have not submitted a description yet"
-    awaiting = "Submitted a brief description, awaiting reply"
-    revising = "Revising based on HSR committee feedback"
-    not_reviewed = "Reviewed by HSR committee: *NOT* HSR"
-    reviewed = "Reviewed by HSR committee: Is HSR, possibly exempt"
-    submitted = "Application for exemption submitted to IRB (no later than April 1, 2021)"
-    confirmed = "Confirmed exempt by IRB (no later than Sept 1, 2021)"
-    not_granted = "Exempt status not granted (must pursue other project)"
-    na = "N/A (project does NOT involve interacting with any people and/or their information)"
-    other = "Other"
-
+def create_tsvector(*args):
+    field, weight = args[0]
+    exp = func.setweight(func.to_tsvector(CONFIG, field), weight)
+    for field, weight in args[1:]:
+        exp = op(exp, '||', func.setweight(func.to_tsvector(CONFIG, field), weight))
+    return exp
 
 class Login(db.Model):
     """
@@ -141,8 +37,8 @@ class Login(db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password = db.Column(db.String(128)) # hashed_password
 
-    # def __repr__(self):
-    #     return '<Login user {}>'.format(self.email)
+    def __repr__(self):
+        return '<Login user {}>'.format(self.email)
 
 
 class User(db.Model):
@@ -154,34 +50,29 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     login_id = db.Column(db.Integer, db.ForeignKey("logins.id"))
-    firstname = db.Column(db.String(128))
-    lastname = db.Column(db.String(128))
-    role = db.Column(db.Enum(RoleEnum))
-    primary_major = db.Column(db.Enum(CollegeEnum))
-    secondary_major = db.Column(db.Enum(CollegeEnum))
-    primary_concentration = db.Column(db.Enum(ConcentrationEnum))
-    secondary_concentration = db.Column(db.Enum(ConcentrationEnum))
+    name = db.Column(db.String(128))
+    # role = db.Column(db.Enum(RoleEnum))
+    class_year = db.Column(db.Integer)
+    primary_major = db.Column(db.String(128))
+    secondary_major = db.Column(db.String(128))
+    primary_concentration = db.Column(db.String(256))
+    secondary_concentration = db.Column(db.String(256))
     special_concentration = db.Column(db.String())
-    minor = db.Column(db.Enum(CollegeEnum))
-    minor_concentration = db.Column(db.Enum(ConcentrationEnum))
+    minor = db.Column(db.String(128))
+    minor_concentration = db.Column(db.String(256))
     
     logins = relationship(Login)
 
-    # Index major and concentration or not?
+    __ts_vector__ = to_tsvector_ix(
+        'name', 'primary_major', 'secondary_major', 'primary_concentration', 'secondary_concentration', 'special_concentration', 'minor', 'minor_concentration'
+    )
+
+    __table_args__ = (
+        Index('user_index', __ts_vector__, postgresql_using='gin'),
+    )
 
     def __repr__(self):
         return '<User info {}{}>'.format(self.firstname, self.lastname)
-
-# Generate marshmallow Schemas from the model
-class UserSchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ("id","login_id", "firstname", "lastname", "role", "primary_major",
-                "secondary_major", "primary_concentration", "secondary_concentration",
-                "special_concentration", "minor", "minor_concentration")
-
-user_schema = UserSchema()
-users_schema = UserSchema(many=True)
 
 
 class Project(db.Model):
@@ -193,29 +84,29 @@ class Project(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    # advisor_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     title = db.Column(db.String())
     abstract = db.Column(db.String())
     keywords = db.Column(db.String())
     feature = db.Column(db.String())
-    # feature = db.Column(db.Enum(FeatureEnum))
-    # feature = db.Column(db.ArrayOfEnum(db.Enum(FeatureEnum)))
+    hsr_review = db.Column(db.String())
+    skills = db.Column(db.String())
     los = db.Column(db.String())
     custom_los = db.Column(db.String())
-    hsr_review = db.Column(db.Enum(HSREnum))
-    last_updated = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    advisor = db.Column(db.String())
+    skills_offering = db.Column(db.String())
+    skills_requesting = db.Column(db.String())
+    location = db.Column(db.String())
+    last_updated = db.Column(db.DateTime, index=True, default=datetime.utcnow().strftime('%m/%d/%Y %H:%M:%S'))
 
     users = relationship(User)
 
+    __ts_vector__ = to_tsvector_ix(
+        'title', 'abstract', 'keywords', 'feature', 'hsr_review', 'skills', 'los', 'custom_los', 'advisor', 'skills_offering', 'skills_requesting', 'location', 'last_updated'
+    )
+
+    __table_args__ = (
+        Index('project_index', __ts_vector__, postgresql_using='gin'),
+    )
+
     def __repr__(self):
         return '<Capstone info {}>'.format(self.title)
-
-# Generate marshmallow Schemas from the model
-class ProjectSchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ("id","user_id", "title", "abstract", "keywords", "feature",
-                "los", "custom_los", "hsr_review", "last_updated")
-
-project_schema = ProjectSchema()
-projects_schema = ProjectSchema(many=True)

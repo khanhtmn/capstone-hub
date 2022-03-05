@@ -14,6 +14,8 @@ import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
+import { majors } from "../assets/MajorList";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -31,8 +33,8 @@ const TopNavBar = (props) => {
   const [userFeatureFilters, setUserFeatureFilters] = useState([]);
 
   useEffect(() => {
-    setUserMajorFilters(props.majorFilters);
-  }, [props.majorFilters]);
+    setUserMajorFilters(majors);
+  }, [majors]);
 
   useEffect(() => {
     setUserFeatureFilters(props.featureFilters);
@@ -106,7 +108,7 @@ const TopNavBar = (props) => {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {props.majorFilters.map((majorFilter) => (
+          {majors.map((majorFilter) => (
             <MenuItem key={majorFilter} value={majorFilter}>
               <Checkbox checked={userMajorFilters.indexOf(majorFilter) > -1} />
               <ListItemText primary={majorFilter} />

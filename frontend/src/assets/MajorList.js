@@ -1,4 +1,4 @@
-const majors = [
+export const majors = [
   "Arts & Humanities",
   "Business",
   "Computational Sciences",
