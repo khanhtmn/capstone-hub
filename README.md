@@ -2,9 +2,7 @@
 
 ## Project demo
 
-https://user-images.githubusercontent.com/44103802/145717404-ddff7b60-4e8e-499e-b150-53cbd118d8ce.mp4
-
-[Or try this link if the video doesn't show](https://www.loom.com/share/9a6cfc0e87774aa4aae9c2b68e9ecc91)
+[Please view it here](https://www.loom.com/share/11b70a15b67a4d5a9e2184f9f84a9aa8)
 
 ## Database schema
 
