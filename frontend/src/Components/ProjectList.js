@@ -10,6 +10,7 @@ const ProjectList = () => {
   const [projects, setProjects] = useState([]);
   const [majorFilters, setMajorFilters] = useState([]);
   const [featureFilters, setFeatureFilters] = useState([]);
+  const [classYearFilters, setClassYearFilters] = useState([]);
   const [renderedProjects, setRenderedProjects] = useState([]); // wait for condition to change
   const [showButton, setShowButton] = useState(false);
 
@@ -64,9 +65,11 @@ const ProjectList = () => {
       <div className="ColumnOuter">
         <TopNavBar
           projects={projects}
+          setProjects={setProjects}
           setRenderedProjects={setRenderedProjects}
           majorFilters={majorFilters}
           featureFilters={featureFilters}
+          classYearFilters={classYearFilters}
         />
         <div className="submitProject">
           <button
@@ -86,25 +89,32 @@ const ProjectList = () => {
               renderedProjects.map((project) => {
                 const abstract_trunc = project.abstract.slice(0, 200);
                 return (
-                  <div className="Card" key={project.id}>
-                    <div className="AvaTextCard">
-                      <img src={SampleAvatar} className="Avatar" alt="Avatar" />
-                      <div className="PersonalInfo">
-                        <Link to={`/users/${project.id}`}>
-                          <p className="UserFirstname">
-                            {project.firstname} {project.lastname}
+                  <Link
+                    to={`/projects/${project.id}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <div className="Card" key={project.id}>
+                      <div className="AvaTextCard">
+                        <img
+                          src={SampleAvatar}
+                          className="Avatar"
+                          alt="Avatar"
+                        />
+                        <div className="PersonalInfo">
+                          <p className="UserFirstname">{project.name}</p>
+                          <p className="Text">
+                            Major: {project.primary_major} -{" "}
+                            {project.primary_concentration}
+                            {project.minor === "NaN"
+                              ? ""
+                              : ` | Minor: ${project.minor}`}
                           </p>
-                        </Link>
-                        <p className="Text">
-                          Major: {project.primary_major} -{" "}
-                          {project.primary_concentration} | Minor:{" "}
-                          {project.minor}
-                        </p>
-                        <p className="Text">Project Features:</p>
+                          <p className="Text">Project Features:</p>
+                        </div>
                       </div>
+                      <p className="Text">{abstract_trunc}...</p>
                     </div>
-                    <p className="Text">{abstract_trunc}...</p>
-                  </div>
+                  </Link>
                 );
               })}
           </div>

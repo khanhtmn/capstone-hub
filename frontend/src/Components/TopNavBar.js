@@ -15,6 +15,8 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
 import { majors } from "../assets/MajorList";
+import { features } from "../assets/FeatureList";
+import { classYears } from "../assets/ClassYearList";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,35 +33,52 @@ const TopNavBar = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const [userMajorFilters, setUserMajorFilters] = useState([]);
   const [userFeatureFilters, setUserFeatureFilters] = useState([]);
+  const [userClassYearFilters, setUserClassYearFilters] = useState([]);
 
   useEffect(() => {
     setUserMajorFilters(majors);
   }, [majors]);
 
   useEffect(() => {
-    setUserFeatureFilters(props.featureFilters);
-  }, [props.featureFilters]);
+    setUserFeatureFilters(features);
+  }, [features]);
+
+  useEffect(() => {
+    setUserClassYearFilters(classYears);
+  }, [classYears]);
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault(); // without this it will reload/refresh the whole page -> invalidate the submission
+    fetch("http://localhost:5000/search?q=" + searchValue.replace(" ", "+"), {
+      methods: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-tokens": localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => props.setProjects(response))
+      .catch((error) => console.log(error));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Jello!");
     const filteredProjects = [];
     for (let project of props.projects) {
-      for (let field in project) {
-        if (
-          project[field] &&
-          field != "id" &&
-          project[field].toLowerCase().includes(searchValue.toLowerCase())
-        ) {
-          if (
-            userMajorFilters.includes(project.primary_major) ||
-            userMajorFilters.includes(project.secondary_major) ||
-            userMajorFilters.includes(project.minor)
-          ) {
-            filteredProjects.push(project);
-            break;
-          }
-        }
+      console.log("feature", project.feature);
+      if (
+        (userMajorFilters.includes(project.primary_major) ||
+          userMajorFilters.includes(project.secondary_major) ||
+          userMajorFilters.includes(project.minor)) &&
+        // userFeatureFilters.includes(project.feature)
+        project.feature
+          .replace("e.g., ", "")
+          .split(", ")
+          .some((smallFeature) => userFeatureFilters.includes(smallFeature)) &&
+        userClassYearFilters.includes(project.class_year)
+      ) {
+        filteredProjects.push(project);
       }
     }
     props.setRenderedProjects(filteredProjects);
@@ -72,11 +91,28 @@ const TopNavBar = (props) => {
         : event.target.value
     );
   };
-  console.log(userMajorFilters, "from TopNavBar");
+  const handleChangeFeatureFilter = (event) => {
+    console.log(event.target.value, "FROM HANDLE CHANGE");
+    setUserFeatureFilters(
+      typeof event.target.value === "string"
+        ? event.target.value.split(",")
+        : event.target.value
+    );
+  };
+  const handleChangeClassYearFilter = (event) => {
+    console.log(event.target.value, "FROM HANDLE CHANGE");
+    setUserClassYearFilters(
+      event.target.value
+      // typeof event.target.value === "string"
+      //   ? event.target.value.split(",")
+      //   : event.target.value
+    );
+  };
+  // console.log(userMajorFilters, "from TopNavBar");
   return (
     <div className="TopNavBar">
       <div className="SearchBox">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSearchSubmit}>
           <TextField
             fullWidth
             label="Search for project, name, etc."
@@ -112,6 +148,58 @@ const TopNavBar = (props) => {
             <MenuItem key={majorFilter} value={majorFilter}>
               <Checkbox checked={userMajorFilters.indexOf(majorFilter) > -1} />
               <ListItemText primary={majorFilter} />
+            </MenuItem>
+          ))}
+          <div>
+            <button onClick={handleSubmit}>Apply</button>
+          </div>
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, width: 350 }}>
+        <InputLabel id="demo-multiple-checkbox-label">Features</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={userFeatureFilters}
+          autoWidth
+          onChange={handleChangeFeatureFilter}
+          input={<OutlinedInput label="Features" />}
+          renderValue={(selected) => selected.join(", ")}
+          MenuProps={MenuProps}
+        >
+          {features.map((FeatureFilter) => (
+            <MenuItem key={FeatureFilter} value={FeatureFilter}>
+              <Checkbox
+                checked={userFeatureFilters.indexOf(FeatureFilter) > -1}
+              />
+              <ListItemText primary={FeatureFilter} />
+            </MenuItem>
+          ))}
+          <div>
+            <button onClick={handleSubmit}>Apply</button>
+          </div>
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, width: 150 }}>
+        <InputLabel id="demo-multiple-checkbox-label">Class year</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={userClassYearFilters}
+          autoWidth
+          onChange={handleChangeClassYearFilter}
+          input={<OutlinedInput label="Class year" />}
+          renderValue={(selected) => selected.join(", ")}
+          MenuProps={MenuProps}
+        >
+          {classYears.map((ClassYearFilter) => (
+            <MenuItem key={ClassYearFilter} value={ClassYearFilter}>
+              <Checkbox
+                checked={userClassYearFilters.indexOf(ClassYearFilter) > -1}
+              />
+              <ListItemText primary={ClassYearFilter} />
             </MenuItem>
           ))}
           <div>
