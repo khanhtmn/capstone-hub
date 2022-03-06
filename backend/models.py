@@ -2,7 +2,7 @@
 Define models for database schema
 '''
 
-from sqlalchemy.sql import func
+# from sqlalchemy.sql import func
     
 from sqlalchemy import func, Index, text
 from sqlalchemy.sql.operators import op
@@ -38,20 +38,18 @@ class Login(db.Model):
     password = db.Column(db.String(128)) # hashed_password
 
     def __repr__(self):
-        return '<Login user {}>'.format(self.email)
+        return '<Login info {}>'.format(self.email)
 
-
-class User(db.Model):
+class UserProject(db.Model):
     """
-    Class defining model for user
+    Class defining model for user info and their Capstone project
     """
 
-    __tablename__ = 'users'
+    __tablename__ = 'user_projects'
 
     id = db.Column(db.Integer, primary_key=True)
-    login_id = db.Column(db.Integer, db.ForeignKey("logins.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("logins.id"))
     name = db.Column(db.String(128))
-    # role = db.Column(db.Enum(RoleEnum))
     class_year = db.Column(db.Integer)
     primary_major = db.Column(db.String(128))
     secondary_major = db.Column(db.String(128))
@@ -61,29 +59,7 @@ class User(db.Model):
     minor = db.Column(db.String(128))
     minor_concentration = db.Column(db.String(256))
     
-    logins = relationship(Login)
 
-    __ts_vector__ = to_tsvector_ix(
-        'name', 'primary_major', 'secondary_major', 'primary_concentration', 'secondary_concentration', 'special_concentration', 'minor', 'minor_concentration'
-    )
-
-    __table_args__ = (
-        Index('user_index', __ts_vector__, postgresql_using='gin'),
-    )
-
-    def __repr__(self):
-        return '<User info {}{}>'.format(self.firstname, self.lastname)
-
-
-class Project(db.Model):
-    """
-    Class defining model for Capstone project
-    """
-
-    __tablename__ = 'projects'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     title = db.Column(db.String())
     abstract = db.Column(db.String())
     keywords = db.Column(db.String())
@@ -98,10 +74,11 @@ class Project(db.Model):
     location = db.Column(db.String())
     last_updated = db.Column(db.DateTime, index=True, default=datetime.utcnow().strftime('%m/%d/%Y %H:%M:%S'))
 
-    users = relationship(User)
+    logins = relationship(Login)
 
     __ts_vector__ = to_tsvector_ix(
-        'title', 'abstract', 'keywords', 'feature', 'hsr_review', 'skills', 'los', 'custom_los', 'advisor', 'skills_offering', 'skills_requesting', 'location', 'last_updated'
+        'name', 'primary_major', 'secondary_major', 'primary_concentration', 'secondary_concentration', 'special_concentration', 'minor', 'minor_concentration',
+        'title', 'abstract', 'keywords', 'feature', 'hsr_review', 'skills', 'los', 'custom_los', 'advisor', 'skills_offering', 'skills_requesting', 'location',
     )
 
     __table_args__ = (
@@ -109,4 +86,4 @@ class Project(db.Model):
     )
 
     def __repr__(self):
-        return '<Capstone info {}>'.format(self.title)
+        return '<User capstone info {}: {}>'.format(self.name, self.title)
