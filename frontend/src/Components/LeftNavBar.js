@@ -12,7 +12,6 @@ const LeftNavBar = () => {
         </div>{" "}
       </Link>
       <div className="AvaText">
-        <img src={SampleAvatar} className="Avatar" alt="Avatar" />
         <div className="PersonalInfo">
           <p className="UserFirstname">Khanh</p>
           <p className="UserClass">Class of 2022</p>

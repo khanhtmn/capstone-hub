@@ -42,28 +42,33 @@ const ViewUser = () => {
           {user && (
             <div className="UserCard" key={user.id}>
               <div className="UserAvaTextCard">
-                <img src={SampleAvatar} className="Avatar" alt="Avatar" />
                 <div className="UserPersonalInfo">
-                  <p className="UserFirstname">
-                    {user.firstname} {user.lastname}
-                  </p>
+                  <p className="UserFirstname">{user.name}</p>
                   <p className="UserText">
                     Primary Major: {user.primary_major} -{" "}
                     {user.primary_concentration}
                   </p>
                   <p className="UserText">
-                    Secondary Major: {user.secondary_major} -{" "}
-                    {user.secondary_concentration}
+                    {user.secondary_major === "NaN"
+                      ? ""
+                      : `Secondary Major: ${user.secondary_major} - 
+                    ${user.secondary_concentration}`}
                   </p>
                   <p className="UserText">
-                    Minor: {user.minor} - {user.minor_concentration}
+                    {user.special_concentration === "NaN"
+                      ? ""
+                      : `Special concentration: ${user.special_concentration}`}
+                  </p>
+                  <p className="UserText">
+                    {user.minor === "NaN"
+                      ? ""
+                      : `Minor: ${user.minor} - ${user.minor_concentration}`}
                   </p>
                 </div>
               </div>
               {/* <hr/> */}
-              <p className="UserHeading">Project Title</p>
-              <p>{user.title}</p>
-              <p className="UserHeading">Project Description</p>
+              <p className="UserHeading">Project Title: {user.title}</p>
+              <p className="UserHeading">Project abstract</p>
               <p>{user.abstract}</p>
               <p className="UserHeading">Project Features</p>
               <p>{user.feature}</p>

@@ -71,7 +71,7 @@ const ProjectList = () => {
           featureFilters={featureFilters}
           classYearFilters={classYearFilters}
         />
-        <div className="submitProject">
+        {/* <div className="submitProject">
           <button
             onClick={() => {
               setShowButton(!showButton);
@@ -79,7 +79,7 @@ const ProjectList = () => {
           >
             Submit your project here
           </button>
-        </div>
+        </div> */}
         {showButton ? (
           <CreateProject />
         ) : (
@@ -95,24 +95,43 @@ const ProjectList = () => {
                   >
                     <div className="Card" key={project.id}>
                       <div className="AvaTextCard">
-                        <img
-                          src={SampleAvatar}
-                          className="Avatar"
-                          alt="Avatar"
-                        />
                         <div className="PersonalInfo">
                           <p className="UserFirstname">{project.name}</p>
                           <p className="Text">
-                            Major: {project.primary_major} -{" "}
-                            {project.primary_concentration}
+                            Major: {project.primary_major}{" "}
+                            {project.secondary_major === "NaN"
+                              ? ""
+                              : ` - Second major: ${project.secondary_major}`}
+                          </p>
+                          <p className="Text">
+                            Concentration(s): {project.primary_concentration}{" "}
+                            {project.secondary_concentration === "NaN"
+                              ? ""
+                              : `- ${project.secondary_concentration}`}
+                            {project.special_concentration === "NaN"
+                              ? ""
+                              : `- ${project.special_concentration}`}
+                          </p>
+                          <p className="Text">
+                            {" "}
                             {project.minor === "NaN"
                               ? ""
-                              : ` | Minor: ${project.minor}`}
+                              : `Minor: ${project.minor}`}
                           </p>
-                          <p className="Text">Project Features:</p>
+                          <p className="Text">
+                            {" "}
+                            {project.minor_concentration === "NaN"
+                              ? ""
+                              : `Minor concentration: ${project.minor_concentration}`}
+                          </p>
                         </div>
                       </div>
-                      <p className="Text">{abstract_trunc}...</p>
+                      {/* <p className="Text">
+                        Project Features: {project.feature}
+                      </p> */}
+                      <div className="ProjectAbstract">
+                        <p className="Text">{abstract_trunc}...</p>
+                      </div>
                     </div>
                   </Link>
                 );
