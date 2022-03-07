@@ -41,7 +41,7 @@
 
 .ProjectList .Card {
   box-sizing: border-box;
-  height: 200px;
+  height: 220px;
   width: 500px;
   border-radius: 8px;
   margin: 8px;
@@ -79,7 +79,7 @@
 }
 
 .ProjectList .Card .AvaTextCard .PersonalInfo .UserFirstname {
-  margin: 0;
+  margin: 5;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
@@ -98,4 +98,13 @@
 
 .ProjectList .Card > .Text {
   margin: 0;
+}
+
+.ProjectList .ProjectAbstract .Text {
+  padding-top: 55px;
+  font-weight: 200;
+  font-size: 12px;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  color: black;
 }

@@ -1,0 +1,16 @@
+export const features = [
+  "Creative (e.g., writing, art)",
+  "Primary research (e.g., with a research group)",
+  "Secondary research (e.g., literature review with analysis/synthesis and proposal for future work)",
+  "Replication",
+  "Interview/survey",
+  "Data analysis",
+  "Journalism",
+  "Philosophical analysis",
+  "Policy analysis/proposal",
+  "Educational curriculum/materials",
+  "Business plan",
+  "Podcast",
+  "App",
+  "Other",
+];
