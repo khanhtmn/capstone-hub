@@ -27,8 +27,7 @@ const ViewUser = () => {
         .then((response) => setUser(response.data))
         .catch((error) => console.log(error));
     } else {
-      // window.history.pushState({}, undefined, "/login");
-      window.history.pushState({}, undefined, "/");
+      window.history.pushState({}, undefined, "/login");
       window.location.reload();
     }
   }, []);
