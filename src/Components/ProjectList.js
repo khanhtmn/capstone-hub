@@ -52,7 +52,8 @@ const ProjectList = () => {
         )
         .catch((error) => console.log(error));
     } else {
-      window.history.pushState({}, undefined, "/login");
+      // window.history.pushState({}, undefined, "/login");
+      window.history.pushState({}, undefined, "/");
       window.location.reload();
     }
   }, []);
