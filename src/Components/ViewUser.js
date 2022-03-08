@@ -16,7 +16,7 @@ const ViewUser = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch(`http://localhost:5000/projects/${id}`, {
+      fetch(`https://capstone-hub-backend.herokuapp.com/projects/${id}`, {
         methods: "GET",
         headers: {
           "Content-Type": "application/json",

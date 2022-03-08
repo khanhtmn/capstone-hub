@@ -31,7 +31,7 @@ const CreateUser = () => {
       minor_concentration: minorConcentration,
     };
     console.log(opts);
-    fetch("http://localhost:5000/projects", {
+    fetch("https://capstone-hub-backend.herokuapp.com/projects", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

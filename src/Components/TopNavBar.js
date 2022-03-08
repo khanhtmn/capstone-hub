@@ -49,13 +49,17 @@ const TopNavBar = (props) => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault(); // without this it will reload/refresh the whole page -> invalidate the submission
-    fetch("http://localhost:5000/search?q=" + searchValue.replace(" ", "+"), {
-      methods: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-tokens": localStorage.getItem("token"),
-      },
-    })
+    fetch(
+      "https://capstone-hub-backend.herokuapp.com/search?q=" +
+        searchValue.replace(" ", "+"),
+      {
+        methods: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-tokens": localStorage.getItem("token"),
+        },
+      }
+    )
       .then((response) => response.json())
       .then((response) => props.setProjects(response))
       .catch((error) => console.log(error));

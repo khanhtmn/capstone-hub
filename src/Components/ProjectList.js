@@ -39,7 +39,7 @@ const ProjectList = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:5000/projects", {
+      fetch("https://capstone-hub-backend.herokuapp.com/projects", {
         methods: "GET",
         headers: {
           "Content-Type": "application/json",
