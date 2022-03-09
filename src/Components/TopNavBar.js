@@ -14,6 +14,9 @@ import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+
 import { majors } from "../assets/MajorList";
 import { features } from "../assets/FeatureList";
 import { classYears } from "../assets/ClassYearList";
@@ -28,6 +31,22 @@ const MenuProps = {
     },
   },
 };
+
+// More color options here:
+// https://mui.com/customization/palette/#adding-new-colors
+// https://mui.com/customization/color/#picking-colors
+
+const theme = createTheme({
+  status: {
+    danger: "#e53e3e",
+  },
+  palette: {
+    neutral: {
+      main: "#64748B",
+      contrastText: "#fff",
+    },
+  },
+});
 
 const TopNavBar = (props) => {
   const [searchValue, setSearchValue] = useState("");
@@ -211,6 +230,20 @@ const TopNavBar = (props) => {
           </div>
         </Select>
       </FormControl>
+      <div className="LogoutButton">
+        <ThemeProvider theme={theme}>
+          <Button
+            size="small"
+            color="neutral"
+            variant="outlined"
+            onClick={() => {
+              localStorage.clear();
+            }}
+          >
+            Log out
+          </Button>
+        </ThemeProvider>
+      </div>
     </div>
   );
 };
