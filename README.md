@@ -2,11 +2,7 @@
 
 ## Project demo
 
-[Please view it here](https://www.loom.com/share/11b70a15b67a4d5a9e2184f9f84a9aa8)
-
-## Database schema
-
-![Database schema](https://i.ibb.co/gtqY4Wz/Capstone-Hub-Database-Schema.png)
+The project is deployed here: [https://capstone-hub.herokuapp.com/](https://capstone-hub.herokuapp.com/)
 
 ## Project design
 
