@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const base64 = require("base-64");
@@ -6,6 +7,7 @@ const base64 = require("base-64");
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const onSubmitClick = (e) => {
     e.preventDefault();
@@ -26,8 +28,7 @@ const Login = (props) => {
         if (token) {
           console.log(token);
           localStorage.setItem("token", token["token"]);
-          window.history.pushState({}, undefined, "/");
-          window.location.reload();
+          navigate("/");
         } else {
           console.log("Please type in correct username/password");
         }
@@ -69,6 +70,7 @@ const Login = (props) => {
             Login
           </button>
         </form>
+        <Link to="/register">Don't have an account yet? Click here</Link>
       </div>
     </div>
   );
