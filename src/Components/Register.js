@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
 const base64 = require("base-64");
@@ -6,6 +7,7 @@ const base64 = require("base-64");
 const Register = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const onSubmitClick = (e) => {
     e.preventDefault();
@@ -22,17 +24,20 @@ const Register = (props) => {
       },
       body: JSON.stringify(opts),
     })
-      .then((r) => r.json())
+      .then((r) => {
+        if (r.status == 201) {
+          return r.json();
+        } else {
+          console.log("Error in registration!");
+        }
+      })
       .then((data) => {
         console.log("Here is the data", data);
-        if (data.status == 201) {
-          console.log(username);
-          window.history.pushState({}, undefined, "/login");
-          window.location.reload();
-        } else {
-          console.log("Please enter email or password or use Minerva address");
-        }
-      });
+        console.log(username);
+        navigate("/login");
+        // navigate("/");
+      })
+      .catch((e) => console.log(e));
   };
 
   const handleUsernameChange = (e) => {

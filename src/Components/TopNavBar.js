@@ -20,6 +20,7 @@ import Button from "@mui/material/Button";
 import { majors } from "../assets/MajorList";
 import { features } from "../assets/FeatureList";
 import { classYears } from "../assets/ClassYearList";
+import { useNavigate } from "react-router-dom";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -53,6 +54,7 @@ const TopNavBar = (props) => {
   const [userMajorFilters, setUserMajorFilters] = useState([]);
   const [userFeatureFilters, setUserFeatureFilters] = useState([]);
   const [userClassYearFilters, setUserClassYearFilters] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUserMajorFilters(majors);
@@ -175,6 +177,12 @@ const TopNavBar = (props) => {
           ))}
           <div>
             <button onClick={handleSubmit}>Apply</button>
+            <button onClick={() => setUserMajorFilters(majors)}>
+              Select all
+            </button>
+            <button onClick={() => setUserMajorFilters([])}>
+              Deselect all
+            </button>
           </div>
         </Select>
       </FormControl>
@@ -201,6 +209,12 @@ const TopNavBar = (props) => {
           ))}
           <div>
             <button onClick={handleSubmit}>Apply</button>
+            <button onClick={() => setUserFeatureFilters(features)}>
+              Select all
+            </button>
+            <button onClick={() => setUserFeatureFilters([])}>
+              Deselect all
+            </button>
           </div>
         </Select>
       </FormControl>
@@ -227,6 +241,12 @@ const TopNavBar = (props) => {
           ))}
           <div>
             <button onClick={handleSubmit}>Apply</button>
+            <button onClick={() => setUserClassYearFilters(classYears)}>
+              Select all
+            </button>
+            <button onClick={() => setUserClassYearFilters([])}>
+              Deselect all
+            </button>
           </div>
         </Select>
       </FormControl>
@@ -238,6 +258,7 @@ const TopNavBar = (props) => {
             variant="outlined"
             onClick={() => {
               localStorage.clear();
+              navigate("/login");
             }}
           >
             Log out
