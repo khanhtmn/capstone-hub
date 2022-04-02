@@ -1,3 +1,7 @@
+/*
+This is main page that displays all projects
+*/
+
 import { useState, useEffect } from "react";
 import SampleAvatar from "./../assets/SampleAvatar.svg";
 import "./ProjectList.css";
@@ -7,6 +11,7 @@ import TopNavBar from "./TopNavBar";
 import { Link } from "react-router-dom";
 
 const ProjectList = () => {
+  // Here are all the variables to do the front-end filter
   const [projects, setProjects] = useState([]);
   const [majorFilters, setMajorFilters] = useState([]);
   const [featureFilters, setFeatureFilters] = useState([]);
