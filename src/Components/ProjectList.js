@@ -39,6 +39,7 @@ const ProjectList = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      // fetch("http://localhost:5000/projects", {
       fetch("https://capstone-hub-backend.herokuapp.com/projects", {
         methods: "GET",
         headers: {
@@ -61,7 +62,7 @@ const ProjectList = () => {
   console.log("HERE ARE THE FEATURES", featureFilters);
   return (
     <div className="ProjectList">
-      <LeftNavBar />
+      {/* <LeftNavBar /> */}
       <div className="ColumnOuter">
         <TopNavBar
           projects={projects}

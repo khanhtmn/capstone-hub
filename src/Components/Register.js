@@ -17,6 +17,7 @@ const Register = (props) => {
       password: password,
     };
     console.log(opts);
+    // fetch("http://localhost:5000/register", {
     fetch("https://capstone-hub-backend.herokuapp.com/register", {
       method: "POST",
       headers: {
