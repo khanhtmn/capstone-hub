@@ -1,3 +1,7 @@
+/*
+This is page that view the details about one's project
+*/
+
 import { useState, useEffect } from "react";
 import SampleAvatar from "./../assets/SampleAvatar.svg";
 import "./ViewUser.css";

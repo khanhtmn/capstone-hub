@@ -1,3 +1,7 @@
+/*
+This is navigation bar that has the search bar and filters
+*/
+
 import "./TopNavBar.css";
 
 import InputAdornment from "@mui/material/InputAdornment";

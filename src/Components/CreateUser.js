@@ -1,3 +1,7 @@
+/*
+This is the file to create new user for the website
+*/
+
 import React, { useEffect, useState } from "react";
 import "./CreateUser.css";
 

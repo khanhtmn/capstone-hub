@@ -1,3 +1,7 @@
+/*
+This is the left nav bar that has the Minerva logo and user information
+*/
+
 import { Link } from "react-router-dom";
 import MinervaLogo from "../assets/MinervaLogo.svg";
 import SampleAvatar from "../assets/SampleAvatar.svg";

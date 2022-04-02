@@ -1,3 +1,7 @@
+/*
+This is main page that handles user registration
+*/
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
