@@ -1,6 +1,6 @@
 # Project overview
 
-## Project demo
+## Project website
 
 The project is deployed here: [https://capstone-hub.herokuapp.com/](https://capstone-hub.herokuapp.com/)
 
