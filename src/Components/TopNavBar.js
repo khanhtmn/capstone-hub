@@ -71,6 +71,7 @@ const TopNavBar = (props) => {
   const handleSearchSubmit = (event) => {
     event.preventDefault(); // without this it will reload/refresh the whole page -> invalidate the submission
     fetch(
+      // "http://localhost:5000/search?q=" +
       "https://capstone-hub-backend.herokuapp.com/search?q=" +
         searchValue.replace(" ", "+"),
       {

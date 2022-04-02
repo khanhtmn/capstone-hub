@@ -16,6 +16,7 @@ const ViewUser = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      // fetch(`http://localhost:5000/projects/${id}`, {
       fetch(`https://capstone-hub-backend.herokuapp.com/projects/${id}`, {
         methods: "GET",
         headers: {
@@ -34,7 +35,7 @@ const ViewUser = () => {
   console.log(user);
   return (
     <div className="ViewUser">
-      <LeftNavBar />
+      {/* <LeftNavBar /> */}
       <div className="ColumnOuter">
         <TopNavBar />
         <div className="CardsCollection">
@@ -67,10 +68,14 @@ const ViewUser = () => {
                 </div>
               </div>
               {/* <hr/> */}
-              <p className="UserHeading">Project Title: {user.title}</p>
+              <p className="UserHeading">Project title: {user.title}</p>
               <p className="UserHeading">Project abstract</p>
+              <p className="UserHeading">
+                Project link:&nbsp;
+                <a href={`${user.project_link}`}>{user.project_link}</a>
+              </p>
               <p>{user.abstract}</p>
-              <p className="UserHeading">Project Features</p>
+              <p className="UserHeading">Project features</p>
               <p>{user.feature}</p>
               <p className="UserHeading">Keywords</p>
               <p>{user.keywords}</p>
